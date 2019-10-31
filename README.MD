@@ -2,4 +2,4 @@
 
 Datasource Module Base
 
-Abstract and common implementation of dms-sdk
+Common implementation of dms-sdk

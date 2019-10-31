@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.metadata.menu.item
+package com.monkeydp.daios.dm.base.metadata.menu.item.main
 
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 

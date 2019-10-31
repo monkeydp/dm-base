@@ -14,6 +14,8 @@ java.sourceCompatibility = VERSION_1_8
 dependencies {
     // sdk
     api("com.monkeydp.daios.dms:dms-sdk")
+    // test
+    testImplementation("junit:junit:4.12")
 }
 
 tasks.withType<KotlinCompile> {

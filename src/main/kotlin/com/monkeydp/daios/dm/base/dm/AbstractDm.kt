@@ -5,12 +5,12 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
 import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
-import com.monkeydp.daios.dms.sdk.metadata.node.struct.NodeStructWrapper
 import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
-import com.monkeydp.tools.ext.getClassname
+import com.monkeydp.daios.dms.sdk.metadata.node.def.annot.NodeDefImpl
+import com.monkeydp.daios.dms.sdk.metadata.node.struct.NodeStructWrapper
 import com.monkeydp.tools.ext.getLogger
 import com.monkeydp.tools.ext.singletonInstance
-import com.monkeydp.tools.util.FileUtil
+import org.reflections.Reflections
 
 /**
  * @author iPotato
@@ -24,38 +24,33 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
         private var isNodeStructInitialized = false
     }
     
-    private var classLoader = Thread.currentThread().contextClassLoader
     protected abstract val config: LocalConfig
+    protected abstract val reflections: Reflections
     
     init {
-        if (shareConfig != null) {
-            classLoader = shareConfig.classLoader
-            updateConfig(shareConfig)
-        }
-    }
-    
-    private val nodeDefMap by lazy {
-        val files = FileUtil.listFiles(config.node.defDirpath)
-        files.map { file ->
-            val classname = file.getClassname(config.classesDirpath)
-            val nd = classLoader.loadClass(classname).singletonInstance() as NodeDef
-            nd.structName to nd
-        }.toMap()
+        if (shareConfig != null) updateConfig(shareConfig)
     }
     
     protected abstract fun updateConfig(config: DmShareConfig)
     
-    protected interface LocalConfig {
-        val classesDirpath: String
-        val node: Node
+    protected abstract inner class LocalConfig {
+        abstract val node: Node
         
-        interface Node {
-            val structWrapper: NodeStructWrapper
-            val defDirpath: String
+        abstract inner class Node {
+            abstract val structWrapper: NodeStructWrapper
+            open val defMap: Map<String, NodeDef>
+                get() =
+                    reflections.getTypesAnnotatedWith(NodeDefImpl::class.java).map {
+                        val nd = it.singletonInstance() as NodeDef
+                        nd.structName to nd
+                    }.toMap()
         }
     }
     
-    protected fun registerStaticComponents() {
+    /**
+     * Should called by init{...} in subclass!
+     */
+    protected fun initialize() {
         log.info("Begin to register all dm static components!")
         initNodeStruct()
         DmImplRegistrar.registerAll(impl, datasource)
@@ -74,12 +69,13 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
     }
     
     private fun recurAssignNodeDefChildren(struct: JsonNode) {
+        val defMap = config.node.defMap
         val fields = struct.fields()
         fields.forEach { (structName, subStruct) ->
-            val def = nodeDefMap.getValue(structName)
+            val def = defMap.getValue(structName)
             val children = mutableListOf<NodeDef>()
             subStruct.fields().forEach { (subStructName, _) ->
-                children.add(nodeDefMap.getValue(subStructName))
+                children.add(defMap.getValue(subStructName))
             }
             def.children = children.toList()
             recurAssignNodeDefChildren(subStruct)

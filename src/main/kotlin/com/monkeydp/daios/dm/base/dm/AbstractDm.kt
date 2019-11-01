@@ -25,7 +25,6 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
     }
     
     protected abstract val config: LocalConfig
-    protected abstract val reflections: Reflections
     
     init {
         if (shareConfig != null) updateConfig(shareConfig)
@@ -38,6 +37,7 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
         
         abstract inner class Node {
             abstract val structWrapper: NodeStructWrapper
+            protected abstract val reflections: Reflections
             open val defMap: Map<String, NodeDef>
                 get() =
                     reflections.getTypesAnnotatedWith(NodeDefImpl::class.java).map {

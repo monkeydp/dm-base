@@ -13,4 +13,5 @@ abstract class AbstractTableNode(
 ) : TableNode, AbstractNode(name) {
     override val target = GlobalTarget.TABLE
     override val icon = GlobalIcon.TABLE_ICON
+    override val initKClass = StdTableNode::class
 }

@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dm.base.jdbc.api.node
 
-import com.monkeydp.daios.dm.base.metadata.node.StdTableNode
 import com.monkeydp.daios.dm.base.metadata.node.TableNode
 import java.sql.Connection
 
@@ -16,7 +15,7 @@ object JdbcTablesLoader {
             val resultSet = it.executeQuery(sql)
             resultSet.use {
                 while (resultSet.next())
-                    nodes.add(StdTableNode(def, resultSet.getString(1)))
+                    nodes.add(def.create(resultSet.getString(1)))
             }
         }
         return nodes

@@ -13,4 +13,5 @@ abstract class AbstractDbNode(
 ) : DbNode, AbstractNode(name) {
     override val target = GlobalTarget.DB
     override val icon = GlobalIcon.DB_ICON
+    override val initKClass = StdDbNode::class
 }

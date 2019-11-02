@@ -24,3 +24,7 @@ tasks.withType<KotlinCompile> {
         jvmTarget = VERSION_1_8.toString()
     }
 }
+
+tasks.withType<Jar>() {
+    exclude("logback.xml")
+}

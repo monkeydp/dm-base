@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dm.base.jdbc.api.node
 
 import com.monkeydp.daios.dm.base.metadata.node.DbNode
-import com.monkeydp.daios.dm.base.metadata.node.StdDbNode
 import java.sql.Connection
 
 /**
@@ -16,7 +15,7 @@ object JdbcDbsLoader {
             val resultSet = it.executeQuery(sql)
             resultSet.use {
                 while (resultSet.next())
-                    nodes.add(StdDbNode(def, resultSet.getString(1)))
+                    nodes.add(def.create(resultSet.getString(1)))
             }
         }
         return nodes

@@ -13,4 +13,5 @@ abstract class AbstractViewNode(
 ) : ViewNode, AbstractNode(name) {
     override val target = GlobalTarget.VIEW
     override val icon = GlobalIcon.VIEW_ICON
+    override val initKClass = StdViewNode::class
 }

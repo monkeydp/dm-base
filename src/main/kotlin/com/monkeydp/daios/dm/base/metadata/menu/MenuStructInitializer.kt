@@ -33,11 +33,11 @@ class MenuStructInitializer(config: LocalConfig) {
     }
     
     private fun assignMenu2Node() {
-        val struct = config.menu.struct["node"]
+        val struct = config.menuConfig.struct["node"]
         struct.fields().forEach {
             val menuStruct: JsonNode? = it.value[menuKey]
             if (menuStruct != null)
-                config.node.defMap.getValue(it.key).menu = parseMenuStruct(menuStruct)
+                config.nodeConfig.map.getValue(it.key).menu = parseMenuStruct(menuStruct)
         }
     }
     
@@ -65,7 +65,7 @@ class MenuStructInitializer(config: LocalConfig) {
         }
         val action = DmImplRegistry.getEnum<Action<*>>(actionName)
         val target = DmImplRegistry.getEnum<Target<*>>(targetName)
-        val item = config.menu.itemMap.getValue(Pair(action, target))
+        val item = config.menuConfig.itemMap.getValue(Pair(action, target))
         
         val subMenuStruct = itemStruct[menuKey]
         if (subMenuStruct != null) {

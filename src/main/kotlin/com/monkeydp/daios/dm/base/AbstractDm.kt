@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
 import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
-import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.tools.ext.getLogger
 
 /**
@@ -21,7 +21,7 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
         private var isNodeStructInitialized = false
     }
     
-    protected abstract val config: LocalConfig
+    abstract val config: LocalConfig
     
     init {
         if (shareConfig != null) updateConfig(shareConfig)
@@ -46,21 +46,21 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
     
     private fun initNodeStruct() {
         if (isNodeStructInitialized) return
-        recurAssignNodeDefChildren(config.node.struct)
+        recurAssignNodeChildren(config.nodeConfig.struct)
         isNodeStructInitialized = true
     }
     
-    private fun recurAssignNodeDefChildren(struct: JsonNode) {
-        val defMap = config.node.defMap
+    private fun recurAssignNodeChildren(struct: JsonNode) {
+        val map = config.nodeConfig.map
         val fields = struct.fields()
         fields.forEach { (structName, subStruct) ->
-            val def = defMap.getValue(structName)
-            val children = mutableListOf<NodeDef>()
+            val node = map.getValue(structName)
+            val children = mutableListOf<Node>()
             subStruct.fields().forEach { (subStructName, _) ->
-                children.add(defMap.getValue(subStructName))
+                children.add(map.getValue(subStructName))
             }
-            def.children = children.toList()
-            recurAssignNodeDefChildren(subStruct)
+            node.children = children.toList()
+            recurAssignNodeChildren(subStruct)
         }
     }
 }

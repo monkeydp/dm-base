@@ -9,9 +9,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
  * @date 2019/11/2
  */
 abstract class AbstractTableNode(
-        def: TableNode? = null,
         name: String = ""
-) : TableNode, AbstractNode(def, name) {
+) : TableNode, AbstractNode(name) {
     override val target = GlobalTarget.TABLE
     override val icon = GlobalIcon.TABLE_ICON
 }

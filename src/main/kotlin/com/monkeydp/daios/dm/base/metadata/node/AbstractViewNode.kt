@@ -9,9 +9,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
  * @date 2019/11/2
  */
 abstract class AbstractViewNode(
-        def: ViewsNode? = null,
         name: String = ""
-) : ViewNode, AbstractNode(def, name) {
+) : ViewNode, AbstractNode(name) {
     override val target = GlobalTarget.VIEW
     override val icon = GlobalIcon.VIEW_ICON
 }

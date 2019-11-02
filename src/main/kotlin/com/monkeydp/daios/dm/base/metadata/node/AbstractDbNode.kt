@@ -9,9 +9,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
  * @date 2019/11/2
  */
 abstract class AbstractDbNode(
-        def: DbNode? = null,
         name: String = ""
-) : DbNode, AbstractNode(def, name) {
+) : DbNode, AbstractNode(name) {
     override val target = GlobalTarget.DB
     override val icon = GlobalIcon.DB_ICON
 }

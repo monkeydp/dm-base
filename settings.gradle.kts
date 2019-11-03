@@ -1,7 +1,7 @@
 rootProject.name = "dm-base"
-includeBuild("../../") {
+includeBuild("../../dms-sdk") {
     dependencySubstitution {
-        substitute(module("com.monkeydp.daios.dms:dms-sdk")).with(project(":dms-sdk"))
+        substitute(module("com.monkeydp.daios.dms:dms-sdk")).with(project(":"))
     }
 }
 includeBuild("../../tools") {

@@ -15,6 +15,11 @@ import com.monkeydp.tools.ext.ierror
  */
 class MenuStructInitializer(config: LocalConfig) {
     
+    companion object {
+        @Volatile
+        private var isInitialized = false
+    }
+    
     private val menuKey = "menu"
     private val itemsKey = "items"
     private val instrKey = "instr"
@@ -29,7 +34,11 @@ class MenuStructInitializer(config: LocalConfig) {
     }
     
     private fun startParsing() {
-        assignMenu2Node()
+        if (isInitialized) return
+        synchronized(isInitialized) {
+            assignMenu2Node()
+            isInitialized = true
+        }
     }
     
     private fun assignMenu2Node() {
@@ -37,7 +46,7 @@ class MenuStructInitializer(config: LocalConfig) {
         struct.fields().forEach {
             val menuStruct: JsonNode? = it.value[menuKey]
             if (menuStruct != null)
-                config.nodeConfig.map.getValue(it.key).menu = parseMenuStruct(menuStruct)
+                config.nodeConfig.defMap.getValue(it.key).menu = parseMenuStruct(menuStruct)
         }
     }
     

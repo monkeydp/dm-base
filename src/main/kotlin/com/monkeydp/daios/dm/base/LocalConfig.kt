@@ -5,8 +5,8 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemImpl
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeImpl
+import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDefImpl
 import com.monkeydp.tools.ext.singletonInstance
 import org.reflections.Reflections
 
@@ -17,13 +17,13 @@ abstract class LocalConfig {
     abstract inner class NodeConfig {
         abstract val struct: JsonNode
         protected abstract val reflections: Reflections
-        val list: List<Node> by lazy {
-            reflections.getTypesAnnotatedWith(NodeImpl::class.java).map {
-                it.singletonInstance() as Node
+        val defs: List<NodeDef> by lazy {
+            reflections.getTypesAnnotatedWith(NodeDefImpl::class.java).map {
+                it.singletonInstance() as NodeDef
             }.toList()
         }
-        val map by lazy {
-            list.map { it.structName to it }.toMap()
+        val defMap by lazy {
+            defs.map { it.structName to it }.toMap()
         }
     }
     

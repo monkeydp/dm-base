@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.metadata.node
+package com.monkeydp.daios.dm.base.metadata.node.main
 
 /**
  * @author iPotato

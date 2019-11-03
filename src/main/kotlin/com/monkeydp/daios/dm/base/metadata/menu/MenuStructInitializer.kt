@@ -2,6 +2,7 @@ package com.monkeydp.daios.dm.base.metadata.menu
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.monkeydp.daios.dm.base.LocalConfig
+import com.monkeydp.daios.dms.sdk.datasource.Datasource.MYSQL
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
@@ -72,8 +73,8 @@ class MenuStructInitializer(config: LocalConfig) {
             actionName = instrStruct[actionKey].asText()
             targetName = instrStruct[targetKey].asText()
         }
-        val action = DmImplRegistry.getEnum<Action<*>>(actionName)
-        val target = DmImplRegistry.getEnum<Target<*>>(targetName)
+        val action = DmImplRegistry.getEnum<Action<*>>(actionName, MYSQL)
+        val target = DmImplRegistry.getEnum<Target<*>>(targetName, MYSQL)
         val item = config.menuConfig.itemMap.getValue(Pair(action, target))
         
         val subMenuStruct = itemStruct[menuKey]

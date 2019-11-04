@@ -2,12 +2,12 @@ package com.monkeydp.daios.dm.base.metadata.menu
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.monkeydp.daios.dm.base.LocalConfig
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.MYSQL
+import com.monkeydp.daios.dm.base.metadata.menu.def.StdMenuDef
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
+import com.monkeydp.daios.dms.sdk.metadata.menu.def.MenuDef
+import com.monkeydp.daios.dms.sdk.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.tools.ext.ierror
 
 /**
@@ -47,40 +47,40 @@ class MenuStructInitializer(config: LocalConfig) {
         struct.fields().forEach {
             val menuStruct: JsonNode? = it.value[menuKey]
             if (menuStruct != null)
-                config.nodeConfig.defMap.getValue(it.key).menu = parseMenuStruct(menuStruct)
+                config.nodeConfig.defMap.getValue(it.key).menuDef = parseMenuStruct(menuStruct)
         }
     }
     
-    private fun parseMenuStruct(menuStruct: JsonNode): Menu {
+    private fun parseMenuStruct(menuStruct: JsonNode): MenuDef {
         val itemsStruct: JsonNode? = menuStruct[itemsKey]
         if (itemsStruct == null) ierror("Parsing menu error, a menu must have an items!")
-        val items = parseItemsStruct(itemsStruct)
-        return StdMenu(items)
+        val items = parseItemDefsStruct(itemsStruct)
+        return StdMenuDef(items)
     }
     
-    private fun parseItemsStruct(itemsStruct: JsonNode) = itemsStruct.map { parseItemStruct(it) }.toList()
+    private fun parseItemDefsStruct(itemsStruct: JsonNode) = itemsStruct.map { parseItemDefStruct(it) }.toList()
     
-    private fun parseItemStruct(itemStruct: JsonNode): MenuItem {
-        val instrStruct: JsonNode? = itemStruct[instrKey]
+    private fun parseItemDefStruct(itemStruct: JsonNode): MenuItemDef {
+        val instrProp: JsonNode? = itemStruct[instrKey]
         val actionName: String
         val targetName: String
-        if (instrStruct == null) {
+        if (instrProp == null) {
             if (itemStruct.size() != 1) ierror("Menu item struct without prop named `instr` can only have one prop, which key is `action` and value is `target`!")
             val next = itemStruct.fields().next()
             actionName = next.key
             targetName = next.value.asText()
         } else {
-            actionName = instrStruct[actionKey].asText()
-            targetName = instrStruct[targetKey].asText()
+            actionName = instrProp[actionKey].asText()
+            targetName = instrProp[targetKey].asText()
         }
-        val action = DmImplRegistry.getEnum<Action<*>>(actionName, MYSQL)
-        val target = DmImplRegistry.getEnum<Target<*>>(targetName, MYSQL)
-        val item = config.menuConfig.itemMap.getValue(Pair(action, target))
+        val action = DmImplRegistry.getEnumByPrefix<Action<*>>(actionName)
+        val target = DmImplRegistry.getEnumByPrefix<Target<*>>(targetName)
+        val itemDef = config.menuConfig.itemDefMap.getValue(Pair(action, target))
         
         val subMenuStruct = itemStruct[menuKey]
         if (subMenuStruct != null) {
-            item.menu = parseMenuStruct(subMenuStruct)
+            itemDef.menuDef = parseMenuStruct(subMenuStruct)
         }
-        return item
+        return itemDef
     }
 }

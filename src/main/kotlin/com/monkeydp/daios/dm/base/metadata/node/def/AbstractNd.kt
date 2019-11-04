@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
+import com.monkeydp.daios.dms.sdk.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeInfo
 import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
-import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
 import com.monkeydp.tools.ext.notNullSingleton
@@ -29,7 +28,7 @@ abstract class AbstractNd(
     override val info = NodeInfo(target, name, icon)
     override var parent: NodeDef? = null
     override var children by Delegates.notNullSingleton<List<NodeDef>>()
-    override var menu: Menu? = null
+    override var menuDef: MenuDef? = null
     
     override fun toString() = this.info.name
 }

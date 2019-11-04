@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dm.base.metadata.node.main
 
+import com.monkeydp.daios.dm.base.metadata.node.def.ConnNd
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
-import com.monkeydp.daios.dms.sdk.metadata.node.main.AbstractNode
-import com.monkeydp.daios.dms.sdk.metadata.node.main.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
+import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 
 /**
  * @author iPotato

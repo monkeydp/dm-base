@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.menu.def
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.def.MenuItemDef
+import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemDef
 
 /**
  * @author iPotato

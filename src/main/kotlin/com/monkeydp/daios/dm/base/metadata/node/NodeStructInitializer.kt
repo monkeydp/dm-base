@@ -2,7 +2,7 @@ package com.monkeydp.daios.dm.base.metadata.node
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.monkeydp.daios.dm.base.LocalConfig.NodeConfig
-import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 
 /**
  * @author iPotato

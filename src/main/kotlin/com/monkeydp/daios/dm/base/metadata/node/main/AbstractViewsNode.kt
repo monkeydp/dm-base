@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.node.main
 
 import com.monkeydp.daios.dm.base.metadata.node.def.ViewsNd
-import com.monkeydp.daios.dms.sdk.metadata.node.main.AbstractNode
+import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
 
 /**
  * @author iPotato

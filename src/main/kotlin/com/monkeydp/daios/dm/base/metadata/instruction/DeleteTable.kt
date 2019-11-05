@@ -6,4 +6,4 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.AbstractInstr
  * @author iPotato
  * @date 2019/10/31
  */
-object NewGroup : AbstractInstr()
+object DeleteTable : AbstractInstr()

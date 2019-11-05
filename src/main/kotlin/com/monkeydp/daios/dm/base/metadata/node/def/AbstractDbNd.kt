@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
-import com.monkeydp.daios.dm.base.metadata.node.main.StdDbNode
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 
@@ -11,6 +10,4 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 abstract class AbstractDbNd : DbNd, AbstractNd(
         target = GlobalTarget.DB,
         icon = GlobalIcon.DB_ICON
-) {
-    override fun create(name: String) = StdDbNode(this, name)
-}
+)

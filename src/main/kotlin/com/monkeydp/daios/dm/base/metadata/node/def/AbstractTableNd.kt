@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
-import com.monkeydp.daios.dm.base.metadata.node.main.StdTableNode
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 
@@ -11,6 +10,4 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 abstract class AbstractTableNd : TableNd, AbstractNd(
         target = GlobalTarget.TABLE,
         icon = GlobalIcon.TABLE_ICON
-) {
-    override fun create(name: String) = StdTableNode(this, name)
-}
+)

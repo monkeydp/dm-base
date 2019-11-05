@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
-import com.monkeydp.daios.dm.base.metadata.node.main.StdConnNode
+import com.monkeydp.daios.dm.base.metadata.node.StdConnNode
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
@@ -13,5 +13,10 @@ abstract class AbstractConnNd : ConnNd, AbstractNd(
         target = GlobalTarget.CONN,
         icon = GlobalIcon.CONN_ICON
 ) {
-    override fun create(cp: ConnProfile) = StdConnNode(this, cp)
+    override fun create(cp: ConnProfile) =
+            StdConnNode(
+                    cp = cp,
+                    target = info.target,
+                    icon = info.icon
+            )
 }

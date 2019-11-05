@@ -10,11 +10,9 @@ import java.sql.Connection
  */
 object JdbcTablesLoader {
     fun loadTables(connection: Connection, def: NodeDef, sql: String): List<Node> {
-        val statement = connection.createStatement()
         val nodes = mutableListOf<Node>()
-        statement.use {
-            val resultSet = it.executeQuery(sql)
-            resultSet.use {
+        connection.createStatement().use {
+            it.executeQuery(sql).use { resultSet ->
                 while (resultSet.next())
                     nodes.add(def.create(resultSet.getString(1)))
             }

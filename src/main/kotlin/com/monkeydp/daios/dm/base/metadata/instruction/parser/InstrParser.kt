@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtx
  * @author iPotato
  * @date 2019/11/5
  */
-interface InstrParser {
+interface InstrParser<in C : InstrParseCtx> {
     val instr: Instruction
-    fun parse(ctx: InstrParseCtx)
+    fun parse(ctx: C)
 }

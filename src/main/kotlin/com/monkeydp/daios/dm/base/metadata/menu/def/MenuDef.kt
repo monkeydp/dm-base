@@ -1,11 +1,14 @@
 package com.monkeydp.daios.dm.base.metadata.menu.def
 
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
+import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 
 /**
  * @author iPotato
  * @date 2019/11/4
  */
-class StdMenuDef(
-        items: List<MenuItemDef> = emptyList()
-) : AbstractMenuDef(items)
+interface MenuDef {
+    val items: List<MenuItemDef>
+    
+    fun create(): Menu
+}

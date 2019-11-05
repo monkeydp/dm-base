@@ -2,12 +2,12 @@ package com.monkeydp.daios.dm.base.metadata.menu
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.monkeydp.daios.dm.base.LocalConfig
+import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.def.StdMenuDef
+import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemDef
 import com.monkeydp.tools.ext.ierror
 
 /**

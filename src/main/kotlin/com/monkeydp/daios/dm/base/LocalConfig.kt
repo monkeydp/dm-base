@@ -1,11 +1,11 @@
 package com.monkeydp.daios.dm.base
 
 import com.fasterxml.jackson.databind.JsonNode
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemDef
+import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDefImpl
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
+import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDefImpl
 import com.monkeydp.tools.ext.singletonInstance
 import org.reflections.Reflections

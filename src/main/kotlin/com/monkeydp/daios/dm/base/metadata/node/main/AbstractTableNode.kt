@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.node.main
 
 import com.monkeydp.daios.dm.base.metadata.node.def.TableNd
-import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
 
 /**
  * @author iPotato

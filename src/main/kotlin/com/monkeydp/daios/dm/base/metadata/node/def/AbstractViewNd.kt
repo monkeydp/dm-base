@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
  * @author iPotato
  * @date 2019/11/2
  */
-abstract class AbstractViewNd : ViewNd, AbstractNd(
+abstract class AbstractViewNd : AbstractNd(
         target = GlobalTarget.VIEW,
         icon = GlobalIcon.VIEW_ICON
 )

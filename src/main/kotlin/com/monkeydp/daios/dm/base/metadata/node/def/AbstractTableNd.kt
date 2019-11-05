@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
  * @author iPotato
  * @date 2019/11/2
  */
-abstract class AbstractTableNd : TableNd, AbstractNd(
+abstract class AbstractTableNd : AbstractNd(
         target = GlobalTarget.TABLE,
         icon = GlobalIcon.TABLE_ICON
 )

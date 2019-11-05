@@ -9,11 +9,11 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
  * @author iPotato
  * @date 2019/11/2
  */
-abstract class AbstractConnNd : ConnNd, AbstractNd(
+abstract class AbstractConnNd : AbstractNd(
         target = GlobalTarget.CONN,
         icon = GlobalIcon.CONN_ICON
 ) {
-    override fun create(cp: ConnProfile) =
+    fun create(cp: ConnProfile) =
             StdConnNode(
                     cp = cp,
                     target = info.target,

@@ -6,4 +6,4 @@ package com.monkeydp.daios.dm.base.metadata.node.def
  */
 abstract class AbstractTablesNd(
         name: String = "Tables"
-) : TablesNd, AbstractGroupNd(name)
+) : AbstractGroupNd(name)

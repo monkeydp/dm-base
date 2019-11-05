@@ -6,4 +6,4 @@ package com.monkeydp.daios.dm.base.metadata.node.def
  */
 abstract class AbstractViewsNd(
         name: String = "Views"
-) : ViewsNd, AbstractGroupNd(name)
+) : AbstractGroupNd(name)

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.menu.item.def
 
-import com.monkeydp.daios.dm.base.metadata.instruction.OpenDb
+import com.monkeydp.daios.dm.base.instruction.OpenDb
 
 /**
  * @author iPotato

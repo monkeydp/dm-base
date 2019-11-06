@@ -6,8 +6,8 @@ import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.def.StdMenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.tools.ext.ierror
 
 /**

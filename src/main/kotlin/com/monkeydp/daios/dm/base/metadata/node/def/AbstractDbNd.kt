@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
+import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 
 /**
  * @author iPotato

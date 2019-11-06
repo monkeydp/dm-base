@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.menu.item
 
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemStatus

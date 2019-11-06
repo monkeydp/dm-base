@@ -1,13 +1,13 @@
 package com.monkeydp.daios.dm.base
 
 import com.fasterxml.jackson.databind.JsonNode
-import com.monkeydp.daios.dm.base.metadata.instruction.parser.InstrParser
-import com.monkeydp.daios.dm.base.metadata.instruction.parser.InstrParserImpl
+import com.monkeydp.daios.dm.base.instruction.parser.InstrParser
+import com.monkeydp.daios.dm.base.instruction.parser.InstrParserImpl
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDefImpl
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDefImpl
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
 import com.monkeydp.tools.ext.singletonInstance
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper

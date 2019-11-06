@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.metadata.instruction.parser
+package com.monkeydp.daios.dm.base.instruction.parser
 
 /**
  * @author iPotato

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.menu.item.def
 
-import com.monkeydp.daios.dm.base.metadata.instruction.ManageGroup
+import com.monkeydp.daios.dm.base.instruction.ManageGroup
 
 /**
  * @author iPotato

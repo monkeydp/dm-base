@@ -1,8 +1,8 @@
-package com.monkeydp.daios.dm.base.metadata.instruction.parser
+package com.monkeydp.daios.dm.base.instruction.parser
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.InstrHelper
-import com.monkeydp.daios.dms.sdk.metadata.instruction.StdInstr
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
+import com.monkeydp.daios.dms.sdk.instruction.StdInstr
+import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
 
 /**
  * @author iPotato

@@ -7,7 +7,7 @@ import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDefImpl
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDefImpl
-import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 import com.monkeydp.tools.ext.singletonInstance
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper
@@ -42,7 +42,7 @@ abstract class LocalConfig {
     
     abstract inner class InstrConfig {
         protected abstract val reflections: Reflections
-        val parsers by lazy { getAnnotSingletons<InstrParser<InstrParseCtx>>(reflections, InstrParserImpl::class) }
+        val parsers by lazy { getAnnotSingletons<InstrParser>(reflections, InstrParserImpl::class) }
         val parserMap by lazy { parsers.map { it.instr to it }.toMap() }
     }
     

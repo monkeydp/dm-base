@@ -4,7 +4,7 @@ import com.monkeydp.daios.dm.base.metadata.menu.MenuStructInitializer
 import com.monkeydp.daios.dm.base.metadata.node.NodeStructInitializer
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
-import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
+import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
 import com.monkeydp.tools.ext.getLogger
 
@@ -12,7 +12,9 @@ import com.monkeydp.tools.ext.getLogger
  * @author iPotato
  * @date 2019/10/27
  */
-abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
+abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
+    
+    val eventPublisher = openConfig.eventPublisher
     
     companion object {
         private val log = getLogger()
@@ -21,10 +23,10 @@ abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
     abstract val config: LocalConfig
     
     init {
-        if (shareConfig != null) updateConfig(shareConfig)
+        if (!openConfig.isMock) updateOpenConfig(openConfig)
     }
     
-    protected abstract fun updateConfig(config: DmShareConfig)
+    protected abstract fun updateOpenConfig(config: DmOpenConfig)
     
     /**
      * Should called by init{...} in subclass!

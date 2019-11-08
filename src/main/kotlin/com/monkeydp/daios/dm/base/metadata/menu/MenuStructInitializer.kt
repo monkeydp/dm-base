@@ -5,7 +5,7 @@ import com.monkeydp.daios.dm.base.LocalConfig
 import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.def.StdMenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
-import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
+import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.instruction.StdInstr
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
@@ -74,8 +74,8 @@ class MenuStructInitializer(config: LocalConfig) {
             actionName = instrProp[actionKey].asText()
             targetName = instrProp[targetKey].asText()
         }
-        val action = DmImplRegistry.getEnumByPrefix<Action<*>>(actionName)
-        val target = DmImplRegistry.getEnumByPrefix<Target<*>>(targetName)
+        val action = SdkImplRegistry.getEnumByPrefix<Action<*>>(actionName)
+        val target = SdkImplRegistry.getEnumByPrefix<Target<*>>(targetName)
         val itemDef = config.menuConfig.itemDefMap.getValue(StdInstr(action, target))
         
         val subMenuStruct = itemStruct[menuKey]

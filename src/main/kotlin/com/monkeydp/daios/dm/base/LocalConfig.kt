@@ -7,8 +7,10 @@ import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDefImpl
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDefImpl
-import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.metadata.form.FormImpl
 import com.monkeydp.tools.ext.singletonInstance
+import com.monkeydp.tools.ext.singletonInstanceX
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper
 import org.reflections.util.ConfigurationBuilder
@@ -17,12 +19,16 @@ import kotlin.reflect.KClass
 abstract class LocalConfig {
     abstract val nodeConfig: NodeConfig
     abstract val menuConfig: MenuConfig
+    abstract val formConfig: FormConfig
     abstract val instrConfig: InstrConfig
     
     @Suppress("UNCHECKED_CAST")
     private fun <T> getAnnotSingletons(reflections: Reflections, annotClass: KClass<out Annotation>) =
             reflections.getTypesAnnotatedWith(annotClass.java)
                     .map { it.singletonInstance() }.toList() as List<T>
+    
+    private fun getAnnotKClasses(reflections: Reflections, annotClass: KClass<out Annotation>) =
+            reflections.getTypesAnnotatedWith(annotClass.java).map { it.kotlin }.toList()
     
     abstract inner class NodeConfig {
         abstract val struct: JsonNode
@@ -36,7 +42,19 @@ abstract class LocalConfig {
         protected abstract val reflections: Reflections
         val itemDefs by lazy { getAnnotSingletons<MenuItemDef>(reflections, MenuItemDefImpl::class) }
         val itemDefMap by lazy {
-            itemDefs.map { Pair(it.info.instr.action, it.info.instr.target) to it }.toMap()
+            itemDefs.map { it.info.instr to it }.toMap()
+        }
+    }
+    
+    abstract inner class FormConfig {
+        protected abstract val reflections: Reflections
+        val formKClasses by lazy { getAnnotKClasses(reflections, FormImpl::class) }
+        val formKClassMap by lazy {
+            formKClasses.map {
+                val instrKClass = it.java.getAnnotation(FormImpl::class.java).instrClass
+                val instr = instrKClass.java.singletonInstanceX<Instruction>()
+                instr to it
+            }.toMap()
         }
     }
     

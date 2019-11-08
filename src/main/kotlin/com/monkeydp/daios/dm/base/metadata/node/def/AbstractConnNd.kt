@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
 import com.monkeydp.daios.dm.base.metadata.node.StdConnNode
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 

@@ -1,14 +1,14 @@
-package com.monkeydp.daios.dm.base.metadata.form.backend
+package com.monkeydp.daios.dm.base.conn
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType.NUMBER
-import com.monkeydp.daios.dms.sdk.metadata.form.backend.CpForm
+import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItemImpl
 
 /**
  * @author iPotato
  * @date 2019/10/25
  */
-abstract class AbstractCpForm(
+abstract class AbstractNewConnForm(
         @FormItemImpl(label = "Connection Name", required = true)
         override val connName: String,
         @FormItemImpl(required = true)
@@ -19,4 +19,4 @@ abstract class AbstractCpForm(
         override val username: String,
         @FormItemImpl(required = true)
         override val password: String
-) : CpForm
+) : NewConnForm

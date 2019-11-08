@@ -14,6 +14,4 @@ abstract class AbstractCpForm(
         override val port: String,
         override val username: String,
         override val password: String
-) : CpForm {
-    fun toUserInput() = JsonUtil.convertTo<UserInput>(this)
-}
+) : CpForm

@@ -11,10 +11,8 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.form.SdkForm
-import com.monkeydp.daios.dms.sdk.metadata.form.SdkFormContract
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.tools.ext.*
+import com.monkeydp.tools.ext.notNullSingleton
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper
 import org.reflections.util.ConfigurationBuilder
@@ -58,18 +56,16 @@ abstract class AbstractSdkImpl(private val dm: Dm) : SdkImpl {
     
     inner class StdClasses : Classes {
         override var newConnFormClass by Delegates.notNullSingleton<KClass<out NewConnForm>>()
+    
+        override var dsVersionClass by Delegates.notNullSingleton<KClass<out DsVersion<*>>>()
+        override var actionClass by Delegates.notNullSingleton<KClass<out Action<*>>>()
+        override var targetClass by Delegates.notNullSingleton<KClass<out Target<*>>>()
+        override var iconClass by Delegates.notNullSingleton<KClass<out Icon<*>>>()
         
         init {
-            SdkClassesInitializer(this, formClassMap())
+            SdkClassesInitializer(this, getReflections())
+            println()
         }
-        
-        private fun formClassMap(): Map<Any, KClass<out Any>> =
-                getReflections().getAnnotKClasses(SdkForm::class)
-                        .map { kClass ->
-                            val contract = kClass.getInterfaces()
-                                    .matchOnce { it.hasAnnotation<SdkFormContract>() }
-                            contract to kClass
-                        }.toMap()
     }
     
     inner class StdEnumClasses : EnumClasses {

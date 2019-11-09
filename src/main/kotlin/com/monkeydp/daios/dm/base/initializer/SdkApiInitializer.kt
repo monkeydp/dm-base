@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.api.SdkApiContract
 import com.monkeydp.tools.ext.getAnnotSingletons
 import com.monkeydp.tools.ext.getInterfaces
 import com.monkeydp.tools.ext.hasAnnotation
-import com.monkeydp.tools.ext.matchOnce
+import com.monkeydp.tools.ext.matchOne
 import org.reflections.Reflections
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.memberProperties
@@ -30,7 +30,7 @@ class SdkApiInitializer(apis: SdkImpl.Apis, private val reflections: Reflections
         val apis = reflections.getAnnotSingletons(SdkApi::class)
         return apis.map { api ->
             val interfaces = api.javaClass.kotlin.getInterfaces()
-            interfaces.matchOnce { it.hasAnnotation<SdkApiContract>() }.java to api
+            interfaces.matchOne { it.hasAnnotation<SdkApiContract>() }.java to api
         }.toMap()
     }
 }

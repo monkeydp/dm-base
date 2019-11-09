@@ -2,8 +2,8 @@ package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dm.base.metadata.menu.MenuStructInitializer
 import com.monkeydp.daios.dm.base.metadata.node.NodeStructInitializer
-import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.SdkImplRegistrar
+import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
 import com.monkeydp.tools.ext.getLogger
@@ -13,6 +13,8 @@ import com.monkeydp.tools.ext.getLogger
  * @date 2019/10/27
  */
 abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
+    
+    override val impl = StdSdkImpl(this)
     
     val eventPublisher = openConfig.eventPublisher
     

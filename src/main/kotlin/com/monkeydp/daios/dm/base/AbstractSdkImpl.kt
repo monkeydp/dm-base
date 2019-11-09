@@ -4,18 +4,27 @@ import com.monkeydp.daios.dms.sdk.SdkImpl
 import com.monkeydp.daios.dms.sdk.SdkPackagePlaceHolder
 import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.enumx.EnumxHelper
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.enumx.SdkEnum
-import com.monkeydp.daios.dms.sdk.enumx.SdkEnumContract
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.tools.ext.getAnnotClasses
 import com.monkeydp.tools.ext.getAnnotKClasses
 import com.monkeydp.tools.ext.getAnnotSingletons
+import com.monkeydp.tools.ext.notNullSingleton
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper
 import org.reflections.util.ConfigurationBuilder
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
+import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl
+import kotlin.properties.Delegates
 import kotlin.reflect.KClass
+import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KProperty
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.javaType
 
 /**
  * @author iPotato
@@ -60,20 +69,32 @@ abstract class AbstractSdkImpl : SdkImpl {
     
     @Suppress("UNCHECKED_CAST")
     public inner class StdEnumClasses : SdkImpl.EnumClasses {
-        
-        private val enumInterfaces =
-                getReflections(SdkPackagePlaceHolder.javaClass.`package`.name)
-                        .getAnnotClasses(SdkEnumContract::class)
-                        .filter { it.isInterface }.map { it }.toSet()
-        
-        private val enumMap = SdkImplMatcher(
-                expectedInterfaces = enumInterfaces,
-                impls = getReflections().getAnnotKClasses(SdkEnum::class)
-        ).capturedMap
-        
-        override val dsVersionClass = enumMap.getValue(DsVersion::class) as KClass<out DsVersion<*>>
-        override val actionClass = enumMap.getValue(Action::class) as KClass<out Action<*>>
-        override val targetClass = enumMap.getValue(Target::class) as KClass<out Target<*>>
-        override val iconClass = enumMap.getValue(Icon::class) as KClass<out Icon<*>>
+        override var dsVersionClass by Delegates.notNullSingleton<KClass<out DsVersion<*>>>()
+        override var actionClass by Delegates.notNullSingleton<KClass<out Action<*>>>()
+        override var targetClass by Delegates.notNullSingleton<KClass<out Target<*>>>()
+        override var iconClass by Delegates.notNullSingleton<KClass<out Icon<*>>>()
+    
+        init {
+            val enumxClassMap = enumxClassMap()
+            this.javaClass.kotlin.memberProperties.forEach {
+                val contractKClass = getFirstUpperBound(it) as KClass<out Enumx<*>>
+                (it as KMutableProperty<*>).setter.call(this, enumxClassMap.getValue(contractKClass))
+            }
+        }
+    
+        private fun getFirstUpperBound(kp: KProperty<*>): KClass<*> {
+            val returnJavaType = kp.returnType.javaType as ParameterizedTypeImpl
+            val wildcardType = returnJavaType.actualTypeArguments[0] as WildcardTypeImpl
+            return (wildcardType.upperBounds[0] as ParameterizedTypeImpl).rawType!!.kotlin
+        }
+    
+        private fun enumxClassMap(): Map<KClass<out Enumx<*>>, KClass<out Enumx<*>>> {
+            val enumxKClasses = getReflections().getAnnotKClasses(SdkEnum::class)
+            return enumxKClasses.map {
+                it as KClass<out Enumx<*>>
+                val enumxKClass = it
+                EnumxHelper.getEnumxContract(enumxKClass) to it
+            }.toMap()
+        }
     }
 }

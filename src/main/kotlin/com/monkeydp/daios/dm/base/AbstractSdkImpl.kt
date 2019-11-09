@@ -4,8 +4,8 @@ import com.monkeydp.daios.dms.sdk.SdkImpl
 import com.monkeydp.daios.dms.sdk.SdkPackagePlaceHolder
 import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.enumx.EnumxHelper
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.EnumxHelper
 import com.monkeydp.daios.dms.sdk.enumx.SdkEnum
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
@@ -52,19 +52,17 @@ abstract class AbstractSdkImpl : SdkImpl {
                 getReflections(SdkPackagePlaceHolder.javaClass.`package`.name)
                         .getAnnotClasses(SdkApiContract::class)
                         .filter { it.isInterface }.map { it }.toSet()
-        
-        private val apiMap by lazy {
-            SdkImplMatcher(
-                    expectedInterfaces = apiInterfaces,
-                    impls = getReflections().getAnnotSingletons(SdkApi::class)
-            ).capturedMap
-        }
-        
-        override val connApi by lazy { apiMap.getValue(ConnApi::class) as ConnApi }
-        override val nodeApi by lazy { apiMap.getValue(NodeApi::class) as NodeApi }
-        override val menuApi by lazy { apiMap.getValue(MenuApi::class) as MenuApi }
-        override val formApi by lazy { apiMap.getValue(FormApi::class) as FormApi }
-        override val instrApi by lazy { apiMap.getValue(InstrApi::class) as InstrApi }
+    
+        private val apiMap = SdkImplMatcher(
+                expectedInterfaces = apiInterfaces,
+                impls = getReflections().getAnnotSingletons(SdkApi::class)
+        ).capturedMap
+    
+        override val connApi = apiMap.getValue(ConnApi::class) as ConnApi
+        override val nodeApi = apiMap.getValue(NodeApi::class) as NodeApi
+        override val menuApi = apiMap.getValue(MenuApi::class) as MenuApi
+        override val formApi = apiMap.getValue(FormApi::class) as FormApi
+        override val instrApi = apiMap.getValue(InstrApi::class) as InstrApi
     }
     
     @Suppress("UNCHECKED_CAST")

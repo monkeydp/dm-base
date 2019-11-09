@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dms.sdk.SdkImpl
-import com.monkeydp.daios.dms.sdk.SdkPackagePlaceHolder
 import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
@@ -10,10 +9,7 @@ import com.monkeydp.daios.dms.sdk.enumx.SdkEnum
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.tools.ext.getAnnotClasses
-import com.monkeydp.tools.ext.getAnnotKClasses
-import com.monkeydp.tools.ext.getAnnotSingletons
-import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.ext.*
 import org.reflections.Reflections
 import org.reflections.util.ClasspathHelper
 import org.reflections.util.ConfigurationBuilder
@@ -48,21 +44,27 @@ abstract class AbstractSdkImpl : SdkImpl {
     
     inner class StdApis : SdkImpl.Apis {
     
-        private val apiInterfaces =
-                getReflections(SdkPackagePlaceHolder.javaClass.`package`.name)
-                        .getAnnotClasses(SdkApiContract::class)
-                        .filter { it.isInterface }.map { it }.toSet()
+        override var connApi by Delegates.notNullSingleton<ConnApi>()
+        override var nodeApi by Delegates.notNullSingleton<NodeApi>()
+        override var menuApi by Delegates.notNullSingleton<MenuApi>()
+        override var formApi by Delegates.notNullSingleton<FormApi>()
+        override var instrApi by Delegates.notNullSingleton<InstrApi>()
     
-        private val apiMap = SdkImplMatcher(
-                expectedInterfaces = apiInterfaces,
-                impls = getReflections().getAnnotSingletons(SdkApi::class)
-        ).capturedMap
+        init {
+            val apiMap = apiMap()
+            this.javaClass.kotlin.memberProperties.forEach {
+                val contractClass = it.returnType.javaType as Class<*>
+                (it as KMutableProperty<*>).setter.call(this, apiMap.getValue(contractClass))
+            }
+        }
     
-        override val connApi = apiMap.getValue(ConnApi::class) as ConnApi
-        override val nodeApi = apiMap.getValue(NodeApi::class) as NodeApi
-        override val menuApi = apiMap.getValue(MenuApi::class) as MenuApi
-        override val formApi = apiMap.getValue(FormApi::class) as FormApi
-        override val instrApi = apiMap.getValue(InstrApi::class) as InstrApi
+        private fun apiMap(): Map<Class<*>, Any> {
+            val apis = getReflections().getAnnotSingletons(SdkApi::class)
+            return apis.map { api ->
+                val interfaces = api.javaClass.kotlin.getInterfaces()
+                interfaces.matchOnce { it.hasAnnotation<SdkApiContract>() }.java to api
+            }.toMap()
+        }
     }
     
     @Suppress("UNCHECKED_CAST")

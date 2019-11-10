@@ -2,7 +2,7 @@ package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dm.base.metadata.menu.MenuStructInitializer
 import com.monkeydp.daios.dm.base.metadata.node.NodeStructInitializer
-import com.monkeydp.daios.dms.sdk.SdkImplRegistrar
+import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
@@ -41,7 +41,7 @@ abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
     
         log.info("Begin to init metadata static struct!")
         NodeStructInitializer(config.nodeConfig)
-        MenuStructInitializer(config)
+        MenuStructInitializer(datasource, config)
         log.info("End to init metadata static struct!")
     }
 }

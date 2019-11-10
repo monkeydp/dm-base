@@ -2,9 +2,8 @@ package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dm.base.initializer.SdkApiInitializer
 import com.monkeydp.daios.dm.base.initializer.SdkClassesInitializer
-import com.monkeydp.daios.dm.base.initializer.SdkEnumClassesInitializer
-import com.monkeydp.daios.dms.sdk.SdkImpl
-import com.monkeydp.daios.dms.sdk.SdkImpl.*
+import com.monkeydp.daios.dms.sdk.main.SdkImpl
+import com.monkeydp.daios.dms.sdk.main.SdkImpl.*
 import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
@@ -27,7 +26,6 @@ abstract class AbstractSdkImpl(private val dm: Dm) : SdkImpl {
     
     override val apis = StdApis()
     override val classes = StdClasses()
-    override val enumClasses = StdEnumClasses()
     
     protected fun getReflections(
             packageName: String? = null,
@@ -55,27 +53,15 @@ abstract class AbstractSdkImpl(private val dm: Dm) : SdkImpl {
     }
     
     inner class StdClasses : Classes {
-        override var newConnFormClass by Delegates.notNullSingleton<KClass<out NewConnForm>>()
+        override var newConnFormKClass by Delegates.notNullSingleton<KClass<out NewConnForm>>()
     
-        override var dsVersionClass by Delegates.notNullSingleton<KClass<out DsVersion<*>>>()
-        override var actionClass by Delegates.notNullSingleton<KClass<out Action<*>>>()
-        override var targetClass by Delegates.notNullSingleton<KClass<out Target<*>>>()
-        override var iconClass by Delegates.notNullSingleton<KClass<out Icon<*>>>()
+        override var dsVersionKClass by Delegates.notNullSingleton<KClass<out DsVersion<*>>>()
+        override var actionKClass by Delegates.notNullSingleton<KClass<out Action<*>>>()
+        override var targetKClass by Delegates.notNullSingleton<KClass<out Target<*>>>()
+        override var iconKClass by Delegates.notNullSingleton<KClass<out Icon<*>>>()
         
         init {
             SdkClassesInitializer(this, getReflections())
-            println()
-        }
-    }
-    
-    inner class StdEnumClasses : EnumClasses {
-        override var dsVersionClass by Delegates.notNullSingleton<KClass<out DsVersion<*>>>()
-        override var actionClass by Delegates.notNullSingleton<KClass<out Action<*>>>()
-        override var targetClass by Delegates.notNullSingleton<KClass<out Target<*>>>()
-        override var iconClass by Delegates.notNullSingleton<KClass<out Icon<*>>>()
-        
-        init {
-            SdkEnumClassesInitializer(this, getReflections())
         }
     }
 }

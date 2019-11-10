@@ -5,7 +5,8 @@ import com.monkeydp.daios.dm.base.LocalConfig
 import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.def.StdMenuDef
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
-import com.monkeydp.daios.dms.sdk.SdkImplRegistry
+import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.instruction.StdInstr
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
@@ -15,7 +16,7 @@ import com.monkeydp.tools.ext.ierror
  * @author iPotato
  * @date 2019/11/1
  */
-class MenuStructInitializer(config: LocalConfig) {
+class MenuStructInitializer(private val datasource: Datasource, config: LocalConfig) {
     
     companion object {
         @Volatile
@@ -74,8 +75,8 @@ class MenuStructInitializer(config: LocalConfig) {
             actionName = instrProp[actionKey].asText()
             targetName = instrProp[targetKey].asText()
         }
-        val action = SdkImplRegistry.getEnumByPrefix<Action<*>>(actionName)
-        val target = SdkImplRegistry.getEnumByPrefix<Target<*>>(targetName)
+        val action = SdkImplRegistry.findEnum<Action<*>>(actionName, datasource)
+        val target = SdkImplRegistry.findEnum<Target<*>>(targetName, datasource)
         val itemDef = config.menuConfig.itemDefMap.getValue(StdInstr(action, target))
         
         val subMenuStruct = itemStruct[menuKey]

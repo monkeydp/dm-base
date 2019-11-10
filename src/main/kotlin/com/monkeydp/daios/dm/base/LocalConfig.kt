@@ -8,7 +8,7 @@ import com.monkeydp.daios.dm.base.metadata.menu.item.def.SdkMenuItemDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dm.base.metadata.node.def.SdkNodeDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.form.SdkForm
+import com.monkeydp.daios.dms.sdk.main.SdkForm
 import com.monkeydp.tools.ext.singletonInstance
 import com.monkeydp.tools.ext.singletonInstanceX
 import org.reflections.Reflections

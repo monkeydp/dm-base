@@ -41,7 +41,7 @@ abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
     
         log.info("Begin to init metadata static struct!")
         NodeStructInitializer(config.nodeConfig)
-        MenuStructInitializer(config)
+        MenuStructInitializer(datasource, config)
         log.info("End to init metadata static struct!")
     }
 }

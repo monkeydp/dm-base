@@ -9,13 +9,9 @@ import com.monkeydp.daios.dms.sdk.metadata.form.SdkForm
 import com.monkeydp.daios.dms.sdk.metadata.form.SdkFormContract
 import com.monkeydp.tools.ext.*
 import org.reflections.Reflections
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
-import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl
 import kotlin.reflect.KClass
 import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty
 import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.javaType
 
 /**
  * @author iPotato
@@ -46,22 +42,12 @@ class SdkClassesInitializer(implClasses: SdkImpl.Classes, private val reflection
     )
     
     init {
-        implClasses.javaClass.kotlin.memberProperties.forEach { kp ->
-            val contractKClass = getFirstUpperBound(kp)
-            val annotKClass = mapMap.keys.matchOne { contractKClass.java.hasAnnotation(it.java) }
-            val map = mapMap.getValue(annotKClass)
-            (kp as KMutableProperty<*>).setter.call(implClasses, map.getValue(contractKClass))
-        }
-    }
-    
-    
-    private fun getFirstUpperBound(kp: KProperty<*>): KClass<*> {
-        val returnJavaType = kp.returnType.javaType as ParameterizedTypeImpl
-        val wildcardType = returnJavaType.actualTypeArguments[0] as WildcardTypeImpl
-        return when (val type = wildcardType.upperBounds[0]) {
-            is ParameterizedTypeImpl -> type.rawType!!.kotlin
-            is Class<*> -> type.kotlin
-            else -> ierror("Unknown type $type!")
-        }
+        implClasses.javaClass.kotlin.memberProperties
+                .forEach { kp ->
+                    val contractKClass = kp.getFirstUpperBound()
+                    val annotKClass = mapMap.keys.matchOne { contractKClass.java.hasAnnotation(it.java) }
+                    val map = mapMap.getValue(annotKClass)
+                    (kp as KMutableProperty<*>).setter.call(implClasses, map.getValue(contractKClass))
+                }
     }
 }

@@ -11,8 +11,8 @@ import java.sql.Connection
 object JdbcTablesLoader {
     fun loadTables(connection: Connection, def: NodeDef, sql: String): List<Node> {
         val nodes = mutableListOf<Node>()
-        connection.createStatement().use {
-            it.executeQuery(sql).use { resultSet ->
+        connection.prepareStatement(sql).use {
+            it.executeQuery().use { resultSet ->
                 while (resultSet.next())
                     nodes.add(def.create(resultSet.getString(1)))
             }

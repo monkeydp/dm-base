@@ -1,6 +1,8 @@
 package com.monkeydp.daios.dm.base.conn
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
+import com.monkeydp.tools.ext.notNullSingleton
+import kotlin.properties.Delegates
 
 /**
  * @author iPotato
@@ -9,4 +11,8 @@ import com.monkeydp.daios.dms.sdk.conn.Conn
 abstract class AbstractConn<C>(
         override val cpId: Long,
         override val rawConn: C
-) : Conn<C>
+) : Conn<C> {
+    override var id by Delegates.notNullSingleton<Long>()
+    
+    override fun toString() = "${javaClass.simpleName}(id=$id, cpId=$cpId, rawConn=$rawConn)"
+}

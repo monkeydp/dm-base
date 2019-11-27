@@ -6,7 +6,7 @@ import org.junit.Test
  * @author iPotato
  * @date 2019/10/31
  */
-class DmBaseMainTest {
+class BaseMainTest {
     @Test
     fun test() {
     

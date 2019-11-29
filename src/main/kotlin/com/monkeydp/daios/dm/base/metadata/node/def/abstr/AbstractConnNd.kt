@@ -17,7 +17,7 @@ abstract class AbstractConnNd : ConnNd, AbstractNd(
     override fun create(cp: ConnProfile) =
             StdConnNode(
                     cp = cp,
-                    defUuid = uuid,
+                    defId = id,
                     target = target,
                     icon = icon,
                     childTargets = childTargets

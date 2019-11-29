@@ -11,7 +11,7 @@ import java.util.*
  * @date 2019/11/3
  */
 interface NodeDef {
-    val uuid: UUID
+    var id: Int
     @Deprecated("")
     val structName: String
     var target: Target<*>

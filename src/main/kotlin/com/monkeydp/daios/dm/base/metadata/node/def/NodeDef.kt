@@ -11,14 +11,17 @@ import com.monkeydp.daios.dms.sdk.metadata.node.Node
  */
 interface NodeDef {
     val structName: String
-    val target: Target<*>
-    val name: String
-    val icon: Icon<*>
+    var target: Target<*>
+    var name: String
+    var icon: Icon<*>
     var parent: NodeDef?
-    var children: List<NodeDef>
+    val children: List<NodeDef>
     val childTargets: List<Target<*>>
         get() = children.map { it.target }
     var menuDef: MenuDef?
     
+    /**
+     * Create a node by current node def
+     */
     fun create(name: String? = null): Node
 }

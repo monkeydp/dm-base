@@ -8,6 +8,7 @@ import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
  * @author iPotato
  * @date 2019/11/3
  */
+@Deprecated("")
 class NodeStructInitializer(config: NodeConfig) {
     
     companion object {
@@ -41,7 +42,7 @@ class NodeStructInitializer(config: NodeConfig) {
                 child.parent = def
                 children.add(child)
             }
-            def.children = children.toList()
+//            def.children = children.toList()
             recurAssignNodeDefChildren(subStruct)
         }
     }

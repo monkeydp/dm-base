@@ -9,26 +9,30 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
-import com.monkeydp.tools.ext.notNullSingleton
-import kotlin.properties.Delegates
 
 /**
  * @author iPotato
  * @date 2019/10/25
  */
 abstract class AbstractNd(
-        override val target: Target<*>,
-        override val name: String = "",
-        override val icon: Icon<*> = EMPTY_ICON
+        override var target: Target<*>,
+        override var name: String = "",
+        override var icon: Icon<*> = EMPTY_ICON
 ) : NodeDef {
     override val structName by lazy @JsonIgnore {
         if (this.javaClass.kotlin.isAbstract) "<no name for abstract>"
         else this.javaClass.simpleName.camelCase2List().lastOf(1).toLowerCase()
     }
     override var parent: NodeDef? = null
-    override var children by Delegates.notNullSingleton<List<NodeDef>>()
+    private val _children = mutableListOf<NodeDef>()
+    override val children
+        get() = _children.toList()
     
     override var menuDef: MenuDef? = null
+    
+    operator fun NodeDef.unaryPlus() {
+        _children.add(this)
+    }
     
     override fun create(name: String?) =
             StdNode(

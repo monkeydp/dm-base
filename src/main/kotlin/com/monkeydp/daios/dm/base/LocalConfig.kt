@@ -17,8 +17,6 @@ import org.reflections.util.ConfigurationBuilder
 import kotlin.reflect.KClass
 
 abstract class LocalConfig {
-    abstract val nodeConfig: NodeConfig
-    abstract val menuConfig: MenuConfig
     abstract val formConfig: FormConfig
     abstract val instrConfig: InstrConfig
     
@@ -29,22 +27,6 @@ abstract class LocalConfig {
     
     private fun getAnnotKClasses(reflections: Reflections, annotClass: KClass<out Annotation>) =
             reflections.getTypesAnnotatedWith(annotClass.java).map { it.kotlin }.toList()
-    
-    abstract inner class NodeConfig {
-        abstract val struct: JsonNode
-        protected abstract val reflections: Reflections
-        val defs by lazy { getAnnotSingletons<NodeDef>(reflections, SdkNodeDef::class) }
-        val defMap by lazy { defs.map { it.structName to it }.toMap() }
-    }
-    
-    abstract inner class MenuConfig {
-        abstract val struct: JsonNode
-        protected abstract val reflections: Reflections
-        val itemDefs by lazy { getAnnotSingletons<MenuItemDef>(reflections, SdkMenuItemDef::class) }
-        val itemDefMap by lazy {
-            itemDefs.map { it.instr to it }.toMap()
-        }
-    }
     
     abstract inner class FormConfig {
         protected abstract val reflections: Reflections

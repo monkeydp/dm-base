@@ -1,11 +1,9 @@
 package com.monkeydp.daios.dm.base
 
-import com.monkeydp.daios.dm.base.metadata.menu.MenuStructInitializer
-import com.monkeydp.daios.dm.base.metadata.node.NodeStructInitializer
-import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
+import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
 import com.monkeydp.tools.ext.getLogger
 
 /**
@@ -38,10 +36,5 @@ abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
         SdkImplRegistrar.registerAll(impl, datasource)
         DmTestdataRegistrar.registerAll(testdata)
         log.info("End to register all dm static components!")
-    
-        log.info("Begin to init metadata static struct!")
-        NodeStructInitializer(config.nodeConfig)
-        MenuStructInitializer(datasource, config)
-        log.info("End to init metadata static struct!")
     }
 }

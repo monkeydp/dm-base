@@ -5,7 +5,6 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemInfo
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
 
 /**
@@ -15,25 +14,19 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
 abstract class AbstractMid(
         instr: Instruction? = null,
         name: String? = null,
-        icon: Icon<*> = EMPTY_ICON
+        icon: Icon<*>? = null
 ) : MenuItemDef {
     
-    private val instr = instr ?: InstrHelper.getInstrByClassname(this)
-    private val name = name ?: "${this.instr.action.fullName} ${this.instr.target.fullName}"
+    override var instr = instr ?: InstrHelper.getInstrByClassname(this)
+    override var name = name ?: "${this.instr.action.fullName} ${this.instr.target.fullName}"
+    override var icon: Icon<*> = icon ?: EMPTY_ICON
     
     override var menuDef: MenuDef? = null
     
-    override val info =
-            MenuItemInfo(
-                    instr = this.instr,
-                    name = this.name,
-                    icon = icon
-            )
-    
     override fun create() = StdMi(
-            instr = info.instr,
-            name = info.name,
-            icon = info.icon,
+            instr = instr,
+            name = name,
+            icon = icon,
             hasSubmenu = menuDef != null
     )
     

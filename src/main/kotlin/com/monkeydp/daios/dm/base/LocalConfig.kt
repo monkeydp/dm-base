@@ -42,7 +42,7 @@ abstract class LocalConfig {
         protected abstract val reflections: Reflections
         val itemDefs by lazy { getAnnotSingletons<MenuItemDef>(reflections, SdkMenuItemDef::class) }
         val itemDefMap by lazy {
-            itemDefs.map { it.info.instr to it }.toMap()
+            itemDefs.map { it.instr to it }.toMap()
         }
     }
     

@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dm.base.metadata.menu.item
 
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
+import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemStatus
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemStatus.ENABLED
 
@@ -20,10 +20,9 @@ abstract class AbstractMi : MenuItem {
     override var status: MenuItemStatus = ENABLED
     
     constructor(def: MenuItemDef) {
-        val info = def.info
-        instr = info.instr
-        name = info.name
-        icon = info.icon
+        instr = def.instr
+        name = def.name
+        icon = def.icon
         hasSubmenu = def.menuDef != null
     }
     

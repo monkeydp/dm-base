@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.menu.def
 
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 
 /**
@@ -10,5 +11,7 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 interface MenuDef {
     val items: List<MenuItemDef>
     
+    operator fun MenuItemDef.unaryPlus()
+    operator fun Instruction.unaryPlus()
     fun create(): Menu
 }

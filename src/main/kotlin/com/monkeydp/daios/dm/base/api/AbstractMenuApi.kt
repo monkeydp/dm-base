@@ -16,7 +16,7 @@ abstract class AbstractMenuApi : MenuApi {
     private fun recurFindNextDef(iterator: MutableIterator<MenuItem>, def: MenuDef): MenuDef? {
         if (!iterator.hasNext()) return def
         val item = iterator.next()
-        var nextDef = def.items.firstOrNull() { it.info.instr == item.instr }?.menuDef
+        var nextDef = def.items.firstOrNull() { it.instr == item.instr }?.menuDef
         if (iterator.hasNext() && nextDef != null) nextDef = recurFindNextDef(iterator, nextDef)
         return nextDef
     }

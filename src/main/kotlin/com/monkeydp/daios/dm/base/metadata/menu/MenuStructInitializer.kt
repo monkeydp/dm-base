@@ -16,6 +16,7 @@ import com.monkeydp.tools.ext.ierror
  * @author iPotato
  * @date 2019/11/1
  */
+@Deprecated("")
 class MenuStructInitializer(private val datasource: Datasource, config: LocalConfig) {
     
     companion object {
@@ -56,8 +57,8 @@ class MenuStructInitializer(private val datasource: Datasource, config: LocalCon
     private fun parseMenuStruct(menuStruct: JsonNode): MenuDef {
         val itemsStruct: JsonNode? = menuStruct[itemsKey]
         if (itemsStruct == null) ierror("Parsing menu error, a menu must have an items!")
-        val items = parseItemDefsStruct(itemsStruct)
-        return StdMenuDef(items)
+//        val items = parseItemDefsStruct(itemsStruct)
+        return StdMenuDef()
     }
     
     private fun parseItemDefsStruct(itemsStruct: JsonNode) = itemsStruct.map { parseItemDefStruct(it) }.toList()

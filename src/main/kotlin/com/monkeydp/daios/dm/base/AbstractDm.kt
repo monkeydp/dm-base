@@ -20,8 +20,6 @@ abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
         private val log = getLogger()
     }
     
-    abstract val config: LocalConfig
-    
     init {
         if (!openConfig.isMock) updateOpenConfig(openConfig)
     }

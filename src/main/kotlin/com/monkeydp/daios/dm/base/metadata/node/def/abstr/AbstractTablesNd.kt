@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.node.def.abstr
 
-import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractGroupNd
+import com.monkeydp.daios.dm.base.metadata.node.def.contract.TablesNd
 
 /**
  * @author iPotato
@@ -8,4 +8,4 @@ import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractGroupNd
  */
 abstract class AbstractTablesNd(
         name: String = "Tables"
-) : AbstractGroupNd(name)
+) : TablesNd, AbstractGroupNd(name)

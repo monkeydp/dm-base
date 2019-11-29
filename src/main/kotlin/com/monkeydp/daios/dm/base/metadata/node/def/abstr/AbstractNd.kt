@@ -9,6 +9,7 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
+import java.util.*
 
 /**
  * @author iPotato
@@ -19,6 +20,7 @@ abstract class AbstractNd(
         override var name: String = "",
         override var icon: Icon<*> = EMPTY_ICON
 ) : NodeDef {
+    override val uuid = UUID.randomUUID()
     override val structName by lazy @JsonIgnore {
         if (this.javaClass.kotlin.isAbstract) "<no name for abstract>"
         else this.javaClass.simpleName.camelCase2List().lastOf(1).toLowerCase()
@@ -36,6 +38,7 @@ abstract class AbstractNd(
     
     override fun create(name: String?) =
             StdNode(
+                    defUuid = uuid,
                     target = target,
                     name = name ?: this.name,
                     icon = icon,

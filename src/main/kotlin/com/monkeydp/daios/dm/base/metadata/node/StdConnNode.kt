@@ -5,6 +5,7 @@ import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
+import java.util.*
 
 /**
  * @author iPotato
@@ -12,8 +13,9 @@ import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
  */
 class StdConnNode(
         override val cp: ConnProfile,
+        defUuid: UUID,
         target: Target<*>,
         icon: Icon<*>,
         name: String = cp.form.connName,
         childTargets: List<Target<*>>
-) : ConnNode, AbstractNode(target, name, icon, childTargets)
+) : ConnNode, AbstractNode(defUuid, target, name, icon, childTargets)

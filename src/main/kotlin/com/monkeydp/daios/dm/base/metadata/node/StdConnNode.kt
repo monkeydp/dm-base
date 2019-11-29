@@ -1,8 +1,9 @@
 package com.monkeydp.daios.dm.base.metadata.node
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
+import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNode
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 
 /**
@@ -11,7 +12,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
  */
 class StdConnNode(
         override val cp: ConnProfile,
-        override val target: Target<*>,
-        override val icon: Icon<*>,
-        override val name: String = cp.form.connName
-) : ConnNode
+        target: Target<*>,
+        icon: Icon<*>,
+        name: String = cp.form.connName,
+        childTargets: List<Target<*>>
+) : ConnNode, AbstractNode(target, name, icon, childTargets)

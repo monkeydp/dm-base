@@ -1,5 +1,6 @@
-package com.monkeydp.daios.dm.base.metadata.node.def
+package com.monkeydp.daios.dm.base.metadata.node.def.abstr
 
+import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractNd
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 

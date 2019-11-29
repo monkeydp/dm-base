@@ -1,9 +1,9 @@
-package com.monkeydp.daios.dm.base.metadata.node.def
+package com.monkeydp.daios.dm.base.metadata.node.def.abstr
 
 import com.monkeydp.daios.dm.base.metadata.node.StdConnNode
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
+import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 
 /**
  * @author iPotato
@@ -16,7 +16,8 @@ abstract class AbstractConnNd : AbstractNd(
     fun create(cp: ConnProfile) =
             StdConnNode(
                     cp = cp,
-                    target = info.target,
-                    icon = info.icon
+                    target = target,
+                    icon = icon,
+                    childTargets = childTargets
             )
 }

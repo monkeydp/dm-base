@@ -1,4 +1,6 @@
-package com.monkeydp.daios.dm.base.metadata.node.def
+package com.monkeydp.daios.dm.base.metadata.node.def.abstr
+
+import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractGroupNd
 
 /**
  * @author iPotato

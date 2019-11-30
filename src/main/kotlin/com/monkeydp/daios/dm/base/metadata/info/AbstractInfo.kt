@@ -8,5 +8,5 @@ import com.monkeydp.tools.ext.toJson
  * @date 2019/11/7
  */
 abstract class AbstractInfo : Info {
-    override fun toString() = data.toJson()
+    override fun toString() = if (data is String) data as String else data.toJson()
 }

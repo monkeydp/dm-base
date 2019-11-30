@@ -24,6 +24,11 @@ interface NodeDef {
     var menuDef: MenuDef?
     
     /**
+     * Add a child by "+"
+     */
+    operator fun NodeDef.unaryPlus()
+    
+    /**
      * Create a node by current node def
      */
     fun create(name: String? = null): Node

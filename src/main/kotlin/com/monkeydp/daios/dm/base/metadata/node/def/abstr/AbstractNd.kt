@@ -33,7 +33,7 @@ abstract class AbstractNd(
     
     override var menuDef: MenuDef? = null
     
-    operator fun NodeDef.unaryPlus() {
+    override operator fun NodeDef.unaryPlus() {
         _children.add(this)
     }
     

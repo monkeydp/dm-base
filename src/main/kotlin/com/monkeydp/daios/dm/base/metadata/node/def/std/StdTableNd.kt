@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dm.base.metadata.node.def.std
 
-import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractConnNd
 import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractTableNd
 
 /**

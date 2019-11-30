@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dm.base.initializer
 
-import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.daios.dms.sdk.main.SdkApi
 import com.monkeydp.daios.dms.sdk.main.SdkApiContract
+import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.tools.ext.getAnnotSingletons
 import com.monkeydp.tools.ext.getInterfaces
 import com.monkeydp.tools.ext.hasAnnotation

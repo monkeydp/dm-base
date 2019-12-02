@@ -16,6 +16,10 @@ import kotlin.reflect.full.memberProperties
 
 class SdkClassesInitializer(implClasses: SdkImpl.Classes, private val reflections: Reflections) {
     
+    companion object {
+        val log = getLogger()
+    }
+    
     private val formMap: Map<Any, KClass<out Any>> =
             reflections.getAnnotKClasses(SdkForm::class)
                     .map { kClass ->
@@ -43,7 +47,12 @@ class SdkClassesInitializer(implClasses: SdkImpl.Classes, private val reflection
                     val contractKClass = kp.getFirstUpperBound()
                     val annotKClass = mapMap.keys.matchOne { contractKClass.java.hasAnnotation(it.java) }
                     val map = mapMap.getValue(annotKClass)
-                    (kp as KMutableProperty<*>).setter.call(implClasses, map.getValue(contractKClass))
+                    val implClass = map[contractKClass]
+                    if (implClass == null && isDebugMode()) {
+                        log.debugMode("$contractKClass not found!")
+                        return@forEach
+                    }
+                    (kp as KMutableProperty<*>).setter.call(implClasses, implClass)
                 }
     }
 }

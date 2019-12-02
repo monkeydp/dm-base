@@ -1,9 +1,11 @@
 package com.monkeydp.daios.dm.base
 
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
 import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
+import com.monkeydp.tools.ext.camelCaseFirst
 import com.monkeydp.tools.ext.getLogger
 
 /**
@@ -12,6 +14,7 @@ import com.monkeydp.tools.ext.getLogger
  */
 abstract class AbstractDm(openConfig: DmOpenConfig) : Dm {
     
+    override val datasource = Datasource.valueOf(javaClass.simpleName.camelCaseFirst().toUpperCase())
     override val impl = StdSdkImpl(this)
     
     val eventPublisher = openConfig.eventPublisher

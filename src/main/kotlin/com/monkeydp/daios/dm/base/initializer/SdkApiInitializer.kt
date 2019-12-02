@@ -3,10 +3,7 @@ package com.monkeydp.daios.dm.base.initializer
 import com.monkeydp.daios.dms.sdk.main.SdkApi
 import com.monkeydp.daios.dms.sdk.main.SdkApiContract
 import com.monkeydp.daios.dms.sdk.main.SdkImpl
-import com.monkeydp.tools.ext.getAnnotSingletons
-import com.monkeydp.tools.ext.getInterfaces
-import com.monkeydp.tools.ext.hasAnnotation
-import com.monkeydp.tools.ext.matchOne
+import com.monkeydp.tools.ext.*
 import org.reflections.Reflections
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.memberProperties
@@ -18,11 +15,20 @@ import kotlin.reflect.jvm.javaType
  */
 class SdkApiInitializer(apis: SdkImpl.Apis, private val reflections: Reflections) {
     
+    companion object {
+        val log = getLogger()
+    }
+    
     init {
         val apiMap = apiMap()
         apis.javaClass.kotlin.memberProperties.forEach {
             val contractClass = it.returnType.javaType as Class<*>
-            (it as KMutableProperty<*>).setter.call(apis, apiMap.getValue(contractClass))
+            val api = apiMap[contractClass]
+            if (api == null && isDebugMode()) {
+                log.debugMode("${contractClass.name} not found!")
+                return@forEach
+            }
+            (it as KMutableProperty<*>).setter.call(apis, api)
         }
     }
     

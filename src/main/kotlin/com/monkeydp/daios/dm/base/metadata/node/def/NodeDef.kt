@@ -18,8 +18,6 @@ interface NodeDef {
     var icon: Icon<*>
     var parent: NodeDef?
     val children: List<NodeDef>
-    val childTargets: List<Target<*>>
-        get() = children.map { it.target }
     var menuDef: MenuDef?
     
     /**

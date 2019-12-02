@@ -15,6 +15,5 @@ class StdConnNode(
         defId: Int,
         target: Target<*>,
         icon: Icon<*>,
-        name: String = cp.form.connName,
-        childTargets: List<Target<*>>
-) : ConnNode, AbstractNode(defId, target, name, icon, childTargets)
+        name: String = cp.form.connName
+) : ConnNode, AbstractNode(defId, target, name, icon)

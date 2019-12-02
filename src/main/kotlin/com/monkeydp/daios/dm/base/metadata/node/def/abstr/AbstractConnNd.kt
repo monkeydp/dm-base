@@ -19,7 +19,6 @@ abstract class AbstractConnNd : ConnNd, AbstractNd(
                     cp = cp,
                     defId = id,
                     target = target,
-                    icon = icon,
-                    childTargets = childTargets
+                    icon = icon
             )
 }

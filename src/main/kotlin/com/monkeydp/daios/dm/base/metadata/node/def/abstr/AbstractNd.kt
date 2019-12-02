@@ -42,8 +42,7 @@ abstract class AbstractNd(
                     defId = id,
                     target = target,
                     name = name ?: this.name,
-                    icon = icon,
-                    childTargets = childTargets
+                    icon = icon
             )
     
     override fun toString() = this.name

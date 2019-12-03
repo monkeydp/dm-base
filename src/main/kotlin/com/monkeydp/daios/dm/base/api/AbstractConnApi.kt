@@ -7,4 +7,4 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  * @author iPotato
  * @date 2019/10/25
  */
-abstract class AbstractConnApi<CP : ConnProfile> : ConnApi<CP>
+abstract class AbstractConnApi : ConnApi

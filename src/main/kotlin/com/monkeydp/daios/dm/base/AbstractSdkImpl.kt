@@ -27,7 +27,7 @@ abstract class AbstractSdkImpl(private val dm: Dm) : SdkImpl {
     override val classes = StdClasses()
     
     inner class StdApis : Apis {
-        override var connApi by Delegates.notNullSingleton<ConnApi<*>>()
+        override var connApi by Delegates.notNullSingleton<ConnApi>()
         override var nodeApi by Delegates.notNullSingleton<NodeApi>()
         override var menuApi by Delegates.notNullSingleton<MenuApi>()
         override var formApi by Delegates.notNullSingleton<FormApi>()

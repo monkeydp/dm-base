@@ -1,13 +1,12 @@
 package com.monkeydp.daios.dm.base.datasource
 
-import com.monkeydp.daios.dms.sdk.datasource.DsDriver
-import com.monkeydp.daios.dms.sdk.datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.datasource.DsDef
+import com.monkeydp.tools.ext.initInstance
 
 /**
  * @author iPotato
  * @date 2019/12/2
  */
-class StdDsDef : AbstractDsDef() {
-    override lateinit var version: DsVersion<*>
-    override var driver: DsDriver = DsDriver.empty()
-}
+class StdDsDef : AbstractDsDef()
+
+fun dsDef(init: DsDef.() -> Unit) = initInstance<StdDsDef>(init)

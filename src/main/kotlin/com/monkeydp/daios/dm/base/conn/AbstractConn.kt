@@ -8,11 +8,10 @@ import kotlin.properties.Delegates
  * @author iPotato
  * @date 2019/10/29
  */
-abstract class AbstractConn<C>(
+abstract class AbstractConn<C : Any>(
         override val cpId: Long,
         override val rawConn: C
 ) : Conn<C> {
     override var id by Delegates.notNullSingleton<Long>()
-    
     override fun toString() = "${javaClass.simpleName}(id=$id, cpId=$cpId, rawConn=$rawConn)"
 }

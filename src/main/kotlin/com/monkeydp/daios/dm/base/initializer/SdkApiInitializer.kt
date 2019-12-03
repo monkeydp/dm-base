@@ -5,6 +5,7 @@ import com.monkeydp.daios.dms.sdk.main.SdkApiContract
 import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.tools.ext.*
 import org.reflections.Reflections
+import java.lang.reflect.ParameterizedType
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaType
@@ -22,7 +23,12 @@ class SdkApiInitializer(apis: SdkImpl.Apis, private val reflections: Reflections
     init {
         val apiMap = apiMap()
         apis.javaClass.kotlin.memberProperties.forEach {
-            val contractClass = it.returnType.javaType as Class<*>
+            val contractClass =
+                    when (val contractType = it.returnType.javaType) {
+                        is Class<*> -> contractType
+                        is ParameterizedType -> contractType.rawType as Class<*>
+                        else -> ierror("Unsupported contract type: ${contractType.typeName}")
+                    }
             val api = apiMap[contractClass]
             if (api == null && isDebugMode()) {
                 log.debugMode("${contractClass.name} not found!")

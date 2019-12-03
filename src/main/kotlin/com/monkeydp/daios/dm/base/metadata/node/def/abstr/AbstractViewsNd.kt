@@ -6,6 +6,4 @@ import com.monkeydp.daios.dm.base.metadata.node.def.contract.ViewsNd
  * @author iPotato
  * @date 2019/11/2
  */
-abstract class AbstractViewsNd(
-        name: String = "Views"
-) : ViewsNd, AbstractGroupNd(name)
+abstract class AbstractViewsNd : ViewsNd, AbstractGroupNd()

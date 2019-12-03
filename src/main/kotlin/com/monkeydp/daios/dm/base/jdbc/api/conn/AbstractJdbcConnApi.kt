@@ -9,10 +9,6 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  * @date 2019/10/25
  */
 abstract class AbstractJdbcConnApi : AbstractConnApi() {
-    override fun fullCp(cp: ConnProfile) =
-            cp.copy(
-                    dsDriverClassname = findDsDef(cp).driver.classname
-            )
-    
-    abstract fun findDsDef(cp: ConnProfile): JdbcDsDef
+    abstract fun ConnProfile.findDsDef(): JdbcDsDef
+    protected fun ConnProfile.findDsDriverClassname() = findDsDef().driver.classname
 }

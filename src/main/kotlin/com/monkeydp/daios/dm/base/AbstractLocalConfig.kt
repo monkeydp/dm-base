@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.main.SdkForm
 import com.monkeydp.tools.ext.getAnnotKClasses
 import com.monkeydp.tools.ext.getAnnotSingletonsX
 import com.monkeydp.tools.ext.getReflections
-import com.monkeydp.tools.ext.singletonInstanceX
+import com.monkeydp.tools.ext.singletonX
 
 abstract class AbstractLocalConfig {
     protected val reflections = getReflections()
@@ -16,7 +16,7 @@ abstract class AbstractLocalConfig {
     val formKClassMap by lazy {
         formKClasses.map {
             val instrKClass = it.java.getAnnotation(SdkForm::class.java).instrClass
-            val instr = instrKClass.java.singletonInstanceX<Instruction>()
+            val instr = instrKClass.java.singletonX<Instruction>()
             instr to it
         }.toMap()
     }

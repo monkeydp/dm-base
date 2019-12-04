@@ -11,8 +11,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.Node
  */
 interface NodeDef {
     var id: Int
-    @Deprecated("")
-    val structName: String
     var target: Target<*>
     var name: String
     var icon: Icon<*>

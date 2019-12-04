@@ -30,10 +30,6 @@ abstract class AbstractNd : NodeDef {
     override var name: String by Delegates.notNullSingleton("")
     override var icon: Icon<*> by Delegates.notNullSingleton(defaultIcon())
     
-    override val structName by lazy @JsonIgnore {
-        if (this.javaClass.kotlin.isAbstract) "<no name for abstract>"
-        else this.javaClass.simpleName.camelCase2List().lastOf(1).toLowerCase()
-    }
     override var parent: NodeDef? = null
     private val _children = mutableListOf<NodeDef>()
     override val children

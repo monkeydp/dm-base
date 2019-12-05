@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dm.base.metadata.node.def.abstr
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget

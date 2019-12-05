@@ -6,6 +6,4 @@ import com.monkeydp.daios.dms.sdk.dm.DmTestdata
  * @author iPotato
  * @date 2019/12/5
  */
-abstract class AbstractDmTestdata : DmTestdata{
-    override fun hasCps() = false
-}
+abstract class AbstractDmTestdata : DmTestdata

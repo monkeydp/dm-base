@@ -42,7 +42,7 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
             DmTestdataRegistrar.registerAll(sdkImpl.testdata)
         } catch (e: Kodein.NotFoundException) {
             if (!isDebugMode()) throw e
-            log.debugMode(e.message!!)
+            log.debugMode(e)
         }
     }
 }

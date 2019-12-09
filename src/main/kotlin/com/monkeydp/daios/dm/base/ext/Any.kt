@@ -10,3 +10,5 @@ import com.monkeydp.tools.ext.camelCaseFirst
 fun Any.getDsNameByClassname() = javaClass.simpleName.camelCaseFirst()
 
 fun Any.getDatasourceByClassname() = Datasource.valueOf(getDsNameByClassname().toUpperCase())
+
+internal fun Any.getDmKodein() = com.monkeydp.daios.dm.base.config.getDmKodein(this)

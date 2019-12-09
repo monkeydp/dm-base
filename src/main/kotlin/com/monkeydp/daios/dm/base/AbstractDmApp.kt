@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dm.base
 
+import com.monkeydp.daios.dm.base.config.putDmKodein
 import com.monkeydp.daios.dm.base.ext.getDatasourceByClassname
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
@@ -22,12 +23,13 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
     
     override val datasource = getDatasourceByClassname()
     
-    private val kodein: Kodein
+    private val dmKodein: Kodein
     override val sdkImpl: SdkImpl
     
     init {
-        kodein = initDmKodein(config.kotlinModule)
-        sdkImpl = StdSdkImpl(kodein)
+        dmKodein = initDmKodein(config.kotlinModule)
+        putDmKodein(this, dmKodein)
+        sdkImpl = StdSdkImpl(dmKodein)
         registerImpl(sdkImpl)
     }
     

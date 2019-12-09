@@ -9,18 +9,19 @@ import com.monkeydp.tools.ext.getAnnotSingletonsX
 import com.monkeydp.tools.ext.getReflections
 import com.monkeydp.tools.ext.singletonX
 
-abstract class AbstractLocalConfig {
-    protected val reflections = getReflections()
+abstract class AbstractLocalConfig : LocalConfig {
+    private val reflections = getReflections()
     
-    val formKClasses by lazy { reflections.getAnnotKClasses(SdkForm::class) }
-    val formKClassMap by lazy {
+    private val formAnnotKClass = SdkForm::class
+    private val formKClasses by lazy { reflections.getAnnotKClasses(formAnnotKClass) }
+    override val formKClassMap by lazy {
         formKClasses.map {
-            val instrKClass = it.java.getAnnotation(SdkForm::class.java).instrClass
+            val instrKClass = it.java.getAnnotation(formAnnotKClass.java).instrClass
             val instr = instrKClass.java.singletonX<Instruction>()
             instr to it
         }.toMap()
     }
     
-    val parsers by lazy { reflections.getAnnotSingletonsX<InstrParser>(InstrParserImpl::class) }
-    val parserMap by lazy { parsers.map { it.instr to it }.toMap() }
+    private val parsers by lazy { reflections.getAnnotSingletonsX<InstrParser>(InstrParserImpl::class) }
+    override val parserMap by lazy { parsers.map { it.instr to it }.toMap() }
 }

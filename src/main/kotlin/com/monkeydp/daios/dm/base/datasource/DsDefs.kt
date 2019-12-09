@@ -4,6 +4,8 @@ import com.monkeydp.daios.dms.sdk.datasource.DsDef
 
 /**
  * @author iPotato
- * @date 2019/12/2
+ * @date 2019/12/9
  */
-abstract class AbstractDsDefs<out DEF : DsDef> : DsDefs<DEF>
+interface DsDefs<out DEF : DsDef> {
+    fun toSet(): Set<DEF>
+}

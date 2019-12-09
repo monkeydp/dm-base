@@ -7,6 +7,6 @@ import com.monkeydp.tools.ext.toPropValueSetX
  * @author iPotato
  * @date 2019/12/2
  */
-abstract class AbstractJdbcDsDefs : AbstractDsDefs() {
+abstract class AbstractJdbcDsDefs : JdbcDsDefs, AbstractDsDefs<JdbcDsDef>() {
     override fun toSet() = toPropValueSetX<JdbcDsDef>()
 }

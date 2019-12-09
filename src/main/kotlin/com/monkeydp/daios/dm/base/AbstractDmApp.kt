@@ -1,13 +1,12 @@
 package com.monkeydp.daios.dm.base
 
-import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dm.base.ext.getDatasourceByClassname
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
 import com.monkeydp.daios.dms.sdk.exception.handler.IgnoreException
 import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
-import com.monkeydp.tools.ext.camelCaseFirst
 import com.monkeydp.tools.ext.getLogger
 import org.kodein.di.Kodein
 
@@ -21,8 +20,7 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
         val log = getLogger()
     }
     
-    private val dsName = javaClass.simpleName.camelCaseFirst()
-    override val datasource = Datasource.valueOf(dsName.toUpperCase())
+    override val datasource = getDatasourceByClassname()
     
     private val kodein: Kodein
     override val sdkImpl: SdkImpl

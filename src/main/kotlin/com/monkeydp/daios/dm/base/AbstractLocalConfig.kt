@@ -3,14 +3,23 @@ package com.monkeydp.daios.dm.base
 import com.monkeydp.daios.dm.base.instruction.parser.InstrParser
 import com.monkeydp.daios.dm.base.instruction.parser.InstrParserImpl
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.main.SdkApi
+import com.monkeydp.daios.dms.sdk.main.SdkApiContract
 import com.monkeydp.daios.dms.sdk.main.SdkForm
-import com.monkeydp.tools.ext.getAnnotKClasses
-import com.monkeydp.tools.ext.getAnnotSingletonsX
-import com.monkeydp.tools.ext.getReflections
-import com.monkeydp.tools.ext.singletonX
+import com.monkeydp.tools.ext.*
+import kotlin.reflect.KClass
 
 abstract class AbstractLocalConfig : LocalConfig {
     private val reflections = getReflections()
+    
+    override val apiMap: Map<KClass<*>, Any>
+        get() {
+            val apiSet = reflections.getAnnotSingletons(SdkApi::class)
+            return apiSet.map { api ->
+                val interfaces = api.javaClass.kotlin.getInterfaces()
+                interfaces.matchOne { it.hasAnnotation<SdkApiContract>() } to api
+            }.toMap()
+        }
     
     private val formAnnotKClass = SdkForm::class
     private val formKClasses by lazy { reflections.getAnnotKClasses(formAnnotKClass) }

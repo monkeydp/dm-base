@@ -28,12 +28,12 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
     override val sdkImpl: SdkImpl
     
     init {
-        kodein = initKodein(config.kotlinModule)
+        kodein = initDmKodein(config.kotlinModule)
         sdkImpl = StdSdkImpl(kodein)
         registerImpl(sdkImpl)
     }
     
-    abstract fun initKodein(vararg modules: Kodein.Module): Kodein
+    abstract fun initDmKodein(vararg modules: Kodein.Module): Kodein
     
     @IgnoreException(Kodein.NotFoundException::class)
     private fun registerImpl(sdkImpl: SdkImpl) {

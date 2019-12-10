@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dm.base.jdbc.api.conn
 
 import com.monkeydp.daios.dm.base.api.AbstractConnApi
-import com.monkeydp.daios.dm.base.ext.getDmKodein
 import com.monkeydp.daios.dm.base.jdbc.datasource.JdbcDsDef
 import com.monkeydp.daios.dm.base.jdbc.datasource.JdbcDsDefs
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
+import com.monkeydp.daios.dms.sdk.ext.getDmKodein
 import org.kodein.di.generic.instance
 
 /**

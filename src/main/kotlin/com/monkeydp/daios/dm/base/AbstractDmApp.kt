@@ -3,11 +3,7 @@ package com.monkeydp.daios.dm.base
 import com.monkeydp.daios.dms.sdk.config.putDmKodein
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
-import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistrar
-import com.monkeydp.daios.dms.sdk.exception.handler.IgnoreException
 import com.monkeydp.daios.dms.sdk.ext.getDatasourceByClassname
-import com.monkeydp.daios.dms.sdk.main.SdkImpl
-import com.monkeydp.daios.dms.sdk.main.SdkImplRegistrar
 import com.monkeydp.tools.ext.getLogger
 import org.kodein.di.Kodein
 
@@ -24,20 +20,11 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
     override val datasource = getDatasourceByClassname()
     
     private val dmKodein: Kodein
-    override val sdkImpl: SdkImpl
     
     init {
         dmKodein = initDmKodein(config.kotlinModule)
         putDmKodein(this, dmKodein)
-        sdkImpl = StdSdkImpl(dmKodein)
-        registerImpl(sdkImpl)
     }
     
     abstract fun initDmKodein(vararg modules: Kodein.Module): Kodein
-    
-    @IgnoreException(Kodein.NotFoundException::class)
-    private fun registerImpl(sdkImpl: SdkImpl) {
-        SdkImplRegistrar.registerAll(sdkImpl, datasource)
-        DmTestdataRegistrar.registerAll(sdkImpl.testdata)
-    }
 }

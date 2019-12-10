@@ -4,8 +4,7 @@ import com.monkeydp.daios.dm.base.api.AbstractConnApi
 import com.monkeydp.daios.dm.base.jdbc.datasource.JdbcDsDef
 import com.monkeydp.daios.dm.base.jdbc.datasource.JdbcDsDefs
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.ext.getDmKodein
-import org.kodein.di.generic.instance
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 
 /**
  * @author iPotato
@@ -13,10 +12,8 @@ import org.kodein.di.generic.instance
  */
 abstract class AbstractJdbcConnApi : AbstractConnApi() {
     
-    private val dmKodein get() = getDmKodein()
-    
     private fun ConnProfile.findJdbcDsDef(): JdbcDsDef {
-        val defs: JdbcDsDefs by dmKodein.instance()
+        val defs: JdbcDsDefs = DmHelper.findImpl()
         return defs.toSet().first { it.version == dsVersion }
     }
     

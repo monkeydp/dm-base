@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.info
 
 import com.monkeydp.daios.dms.sdk.metadata.info.Info
-import com.monkeydp.tools.ext.toJson
+import com.monkeydp.tools.ext.kotlin.toJson
 
 /**
  * @author iPotato

@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.datasource
 
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
-import com.monkeydp.tools.ext.initInstance
+import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato

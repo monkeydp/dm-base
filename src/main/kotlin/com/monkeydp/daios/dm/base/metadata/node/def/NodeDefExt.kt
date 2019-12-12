@@ -2,7 +2,7 @@ package com.monkeydp.daios.dm.base.metadata.node.def
 
 import com.monkeydp.daios.dm.base.metadata.node.def.contract.*
 import com.monkeydp.daios.dm.base.metadata.node.def.std.*
-import com.monkeydp.tools.ext.initInstance
+import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato

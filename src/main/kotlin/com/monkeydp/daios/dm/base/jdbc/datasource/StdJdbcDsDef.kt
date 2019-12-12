@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dm.base.jdbc.datasource
 
-import com.monkeydp.tools.ext.initInstance
+import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -8,4 +8,5 @@ import com.monkeydp.tools.ext.initInstance
  */
 class StdJdbcDsDef : AbstractJdbcDsDef()
 
-fun jdbcDsDef(init: JdbcDsDef.() -> Unit) = initInstance<StdJdbcDsDef>(init)
+fun jdbcDsDef(init: JdbcDsDef.() -> Unit) =
+        initInstance<StdJdbcDsDef>(init)

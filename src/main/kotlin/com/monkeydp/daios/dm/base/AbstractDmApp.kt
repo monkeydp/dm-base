@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.config.putDmKodein
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.daios.dms.sdk.ext.getDatasourceByClassname
-import com.monkeydp.tools.logger.getLogger
+import com.monkeydp.tools.ext.logger.getLogger
 import org.kodein.di.Kodein
 
 /**

@@ -2,7 +2,7 @@ package com.monkeydp.daios.dm.base.conn
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
-import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import kotlin.properties.Delegates
 
 /**

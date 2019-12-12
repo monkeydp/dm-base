@@ -4,7 +4,7 @@ import com.monkeydp.daios.dm.base.metadata.node.def.contract.GroupNd
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget.GROUP
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.Companion.GROUP_SUFFIX
-import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import kotlin.properties.Delegates
 
 /**

@@ -9,10 +9,10 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.Companion.SUFFIX
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
-import com.monkeydp.tools.ext.camelCase2List
-import com.monkeydp.tools.ext.lastOf
-import com.monkeydp.tools.ext.notNullSingleton
-import com.monkeydp.tools.ext.valueOfOrNull
+import com.monkeydp.tools.ext.kotlin.camelCase2List
+import com.monkeydp.tools.ext.kotlin.lastOf
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.valueOfOrNull
 import kotlin.properties.Delegates
 
 /**

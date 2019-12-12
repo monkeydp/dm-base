@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.jdbc.datasource
 
 import com.monkeydp.daios.dm.base.datasource.AbstractDsDefs
-import com.monkeydp.tools.ext.toPropValueSetX
+import com.monkeydp.tools.ext.kotlin.toPropValueSetX
 
 /**
  * @author iPotato

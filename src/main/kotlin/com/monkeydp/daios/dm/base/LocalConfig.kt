@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * @date 2019/12/9
  */
 interface LocalConfig {
-    val apiMap: Map<KClass<*>, Any>
+    val components: List<Any>
     val formKClassMap: Map<Instruction, KClass<*>>
     val parserMap: Map<Instruction, InstrParser>
 }

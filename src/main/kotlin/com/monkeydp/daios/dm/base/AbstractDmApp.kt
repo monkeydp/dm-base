@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.config.putDmKodein
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.daios.dms.sdk.ext.getDatasourceByClassname
-import com.monkeydp.tools.ext.getLogger
+import com.monkeydp.tools.logger.getLogger
 import org.kodein.di.Kodein
 
 /**
@@ -26,5 +26,5 @@ abstract class AbstractDmApp(config: DmConfig) : DmApp {
         putDmKodein(this, dmKodein)
     }
     
-    abstract fun initDmKodein(vararg modules: Kodein.Module): Kodein
+    protected abstract fun initDmKodein(vararg modules: Kodein.Module): Kodein
 }

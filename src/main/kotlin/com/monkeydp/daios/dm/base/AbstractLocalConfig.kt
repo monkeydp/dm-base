@@ -2,27 +2,38 @@ package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dm.base.instruction.parser.InstrParser
 import com.monkeydp.daios.dm.base.instruction.parser.InstrParserImpl
+import com.monkeydp.daios.dms.sdk.annot.SdkForm
+import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.main.SdkApi
-import com.monkeydp.daios.dms.sdk.main.SdkApiContract
-import com.monkeydp.daios.dms.sdk.main.SdkForm
-import com.monkeydp.tools.ext.*
-import kotlin.reflect.KClass
+import com.monkeydp.tools.ext.getReflections
+import com.monkeydp.tools.ext.singletonX
+import com.monkeydp.tools.kodein.KodeinComponent
+import com.monkeydp.tools.kodein.KodeinComponent.Type.K_CLASS
+import com.monkeydp.tools.kodein.KodeinComponent.Type.SINGLETON
+import com.monkeydp.tools.reflections.*
+import kotlin.reflect.full.findAnnotation
 
 abstract class AbstractLocalConfig : LocalConfig {
+    
     private val reflections = getReflections()
     
-    override val apiMap: Map<KClass<*>, Any>
-        get() {
-            val apiSet = reflections.getAnnotSingletons(SdkApi::class)
-            return apiSet.map { api ->
-                val interfaces = api.javaClass.kotlin.getInterfaces()
-                interfaces.matchOne { it.hasAnnotation<SdkApiContract>() } to api
-            }.toMap()
-        }
+    private val componentsMap by lazy {
+        val classLoader = javaClass.classLoader
+        val reflections = reflections(listOf(PackageName.sdk, PackageName.dm), classLoader)
+        val annotKClasses = reflections.getAnnotatedAnnotKClasses(KodeinComponent::class, true)
+        annotKClasses.map { annotKClass ->
+            val kodeinComponent = annotKClass.findAnnotation<KodeinComponent>()!!
+            annotKClass to when (kodeinComponent.type) {
+                SINGLETON -> reflections.getAnnotatedSingletons(annotKClass)
+                K_CLASS -> reflections.getAnnotatedKClasses(annotKClass)
+            }
+        }.toMap()
+    }
+    
+    override val components = componentsMap.values.toList().flatten()
     
     private val formAnnotKClass = SdkForm::class
-    private val formKClasses by lazy { reflections.getAnnotKClasses(formAnnotKClass) }
+    private val formKClasses by lazy { reflections.getAnnotatedKClasses(formAnnotKClass) }
     override val formKClassMap by lazy {
         formKClasses.map {
             val instrKClass = it.java.getAnnotation(formAnnotKClass.java).instrClass
@@ -31,6 +42,6 @@ abstract class AbstractLocalConfig : LocalConfig {
         }.toMap()
     }
     
-    private val parsers by lazy { reflections.getAnnotSingletonsX<InstrParser>(InstrParserImpl::class) }
+    private val parsers by lazy { reflections.getAnnotatedSingletonsX<InstrParser>(InstrParserImpl::class) }
     override val parserMap by lazy { parsers.map { it.instr to it }.toMap() }
 }

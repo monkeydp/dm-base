@@ -5,12 +5,11 @@ import com.monkeydp.daios.dm.base.instruction.parser.InstrParserImpl
 import com.monkeydp.daios.dms.sdk.annot.SdkForm
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.tools.ext.kotlin.getReflections
 import com.monkeydp.tools.ext.java.singletonX
-import com.monkeydp.tools.ext.kodein.KodeinComponent
-import com.monkeydp.tools.ext.kodein.KodeinComponent.Type.K_CLASS
-import com.monkeydp.tools.ext.kodein.KodeinComponent.Type.SINGLETON
-import com.monkeydp.tools.ext.reflections.*
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent.Type.K_CLASS
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent.Type.SINGLETON
+import com.monkeydp.tools.ext.kotlin.getReflections
 import com.monkeydp.tools.ext.reflections.*
 import kotlin.reflect.full.findAnnotation
 
@@ -18,21 +17,19 @@ abstract class AbstractLocalConfig : LocalConfig {
     
     private val reflections = getReflections()
     
-    private val componentsMap by lazy {
+    override val componentsMap by lazy {
         val classLoader = javaClass.classLoader
         val reflections =
                 reflections(listOf(PackageName.sdk, PackageName.dm), classLoader)
         val annotKClasses = reflections.getAnnotatedAnnotKClasses(KodeinComponent::class, true)
         annotKClasses.map { annotKClass ->
-            val kodeinComponent = annotKClass.findAnnotation<KodeinComponent>()!!
+            val kodeinComponent = annotKClass.findAnnotation<KodeinComponent<*>>()!!
             annotKClass to when (kodeinComponent.type) {
                 SINGLETON -> reflections.getAnnotatedSingletons(annotKClass)
                 K_CLASS -> reflections.getAnnotatedKClasses(annotKClass)
             }
         }.toMap()
     }
-    
-    override val components = componentsMap.values.toList().flatten()
     
     private val formAnnotKClass = SdkForm::class
     private val formKClasses by lazy { reflections.getAnnotatedKClasses(formAnnotKClass) }

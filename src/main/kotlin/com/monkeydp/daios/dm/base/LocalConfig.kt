@@ -9,7 +9,8 @@ import kotlin.reflect.KClass
  * @date 2019/12/9
  */
 interface LocalConfig {
-    val components: List<Any>
+    val componentsMap: Map<KClass<out Annotation>, Set<Any>>
+    val components get() = componentsMap.values.toList().flatten()
     val formKClassMap: Map<Instruction, KClass<*>>
     val parserMap: Map<Instruction, InstrParser>
 }

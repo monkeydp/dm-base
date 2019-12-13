@@ -7,6 +7,5 @@ import kotlin.reflect.KClass
  * @date 2019/12/9
  */
 interface ComponentConfig {
-    val componentsMap: Map<KClass<out Annotation>, Set<Any>>
-    val components get() = componentsMap.values.toList().flatten()
+    val componentsMap: Map<KClass<out Annotation>, Collection<Any>>
 }

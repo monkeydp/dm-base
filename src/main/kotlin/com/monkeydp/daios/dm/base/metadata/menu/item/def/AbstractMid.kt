@@ -6,6 +6,9 @@ import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
+import com.monkeydp.tools.exception.inner.PropertyUninitializedException
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
+import kotlin.properties.Delegates
 
 /**
  * @author iPotato
@@ -17,9 +20,22 @@ abstract class AbstractMid(
         icon: Icon<*>? = null
 ) : MenuItemDef {
     
-    override var instr = instr ?: InstrHelper.getInstrByClassname(this)
-    override var name = name ?: "${this.instr.action.fullName} ${this.instr.target.fullName}"
-    override var icon: Icon<*> = icon ?: EMPTY_ICON
+    private val defaultInstr = instr ?: InstrHelper.getInstrOrNull(this)
+    override var instr by Delegates.notNullSingleton(defaultInstr)
+    
+    private val _name: String? = name
+    private val defaultName
+        get() =
+            try {
+                _name ?: this.instr.toString()
+            } catch (e: PropertyUninitializedException) {
+                null
+            }
+    
+    override var name: String by Delegates.notNullSingleton(::defaultName)
+    
+    private val defaultIcon = icon ?: EMPTY_ICON
+    override var icon by Delegates.notNullSingleton(defaultIcon)
     
     override var menuDef: MenuDef? = null
     

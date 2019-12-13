@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.instruction
+package com.monkeydp.daios.dm.base.instruction.main
 
 import com.monkeydp.daios.dms.sdk.instruction.AbstractInstr
 

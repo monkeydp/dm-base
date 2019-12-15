@@ -1,9 +1,7 @@
 package com.monkeydp.daios.dm.base
 
-import com.monkeydp.daios.dms.sdk.config.putDmKodein
-import com.monkeydp.daios.dms.sdk.dm.DmApp
-import com.monkeydp.daios.dms.sdk.dm.DmConfig
-import com.monkeydp.daios.dms.sdk.ext.getDatasourceByClassname
+import com.monkeydp.daios.dms.sdk.config.kodein.dmsShareKodeinModule
+import com.monkeydp.daios.dms.sdk.config.kodein.putDmShareKodein
 import com.monkeydp.tools.ext.logger.getLogger
 import org.kodein.di.Kodein
 
@@ -11,20 +9,18 @@ import org.kodein.di.Kodein
  * @author iPotato
  * @date 2019/12/4
  */
-abstract class AbstractDmApp(config: DmConfig) : DmApp {
+abstract class AbstractDmApp : DmApp {
     
     companion object {
         val log = getLogger()
     }
     
-    override val datasource = getDatasourceByClassname()
-    
-    private val dmKodein: Kodein
+    private val dmShareKodein: Kodein
     
     init {
-        dmKodein = initDmKodein(config.kotlinModule)
-        putDmKodein(this, dmKodein)
+        dmShareKodein = initDmShareKodein(dmsShareKodeinModule)
+        putDmShareKodein(this, dmShareKodein)
     }
     
-    protected abstract fun initDmKodein(vararg modules: Kodein.Module): Kodein
+    protected abstract fun initDmShareKodein(vararg modules: Kodein.Module): Kodein
 }

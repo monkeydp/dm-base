@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base
 
-import com.monkeydp.daios.dms.sdk.config.kodein.dmsShareKodeinModule
-import com.monkeydp.daios.dms.sdk.config.kodein.putDmShareKodein
+import com.monkeydp.daios.dms.sdk.share.kodein.dmsShareKodeinModule
+import com.monkeydp.daios.dms.sdk.share.kodein.putDmShareKodein
 import com.monkeydp.tools.ext.logger.getLogger
 import org.kodein.di.Kodein
 

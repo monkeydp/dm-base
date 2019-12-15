@@ -12,9 +12,9 @@ import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
  */
 abstract class AbstractJdbcConnApi : AbstractConnApi() {
     
-    private val defs: Set<JdbcDsDef> get() = DmKodeinHelper.findImpl(tag = SdkDsDef::class)
-    
-    private fun ConnProfile.findJdbcDsDef(): JdbcDsDef = defs.first { it.version == dsVersion }
+    private fun ConnProfile.findJdbcDsDef(): JdbcDsDef =
+            DmKodeinHelper.findImpl<Set<JdbcDsDef>>(datasource, tag = SdkDsDef::class)
+                    .first { it.version == dsVersion }
     
     protected fun ConnProfile.findDsDriverClassname() = findJdbcDsDef().driver.classname
 }

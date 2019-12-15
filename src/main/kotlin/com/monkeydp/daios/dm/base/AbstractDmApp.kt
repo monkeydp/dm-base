@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dm.base
 
-import com.monkeydp.daios.dms.sdk.share.kodein.dmsShareKodeinModule
-import com.monkeydp.daios.dms.sdk.share.kodein.putDmShareKodein
+import com.monkeydp.daios.dms.sdk.share.kodein.putDmKodein
 import com.monkeydp.tools.ext.logger.getLogger
 import org.kodein.di.Kodein
 
@@ -15,12 +14,12 @@ abstract class AbstractDmApp : DmApp {
         val log = getLogger()
     }
     
-    private val dmShareKodein: Kodein
+    private val dmKodein: Kodein
     
     init {
-        dmShareKodein = initDmShareKodein(dmsShareKodeinModule)
-        putDmShareKodein(this, dmShareKodein)
+        dmKodein = initDmKodein()
+        putDmKodein(this, dmKodein)
     }
     
-    protected abstract fun initDmShareKodein(vararg modules: Kodein.Module): Kodein
+    protected abstract fun initDmKodein(): Kodein
 }

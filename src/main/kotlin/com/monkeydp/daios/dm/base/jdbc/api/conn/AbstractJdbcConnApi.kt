@@ -2,7 +2,6 @@ package com.monkeydp.daios.dm.base.jdbc.api.conn
 
 import com.monkeydp.daios.dm.base.api.AbstractConnApi
 import com.monkeydp.daios.dm.base.jdbc.datasource.JdbcDsDef
-import com.monkeydp.daios.dms.sdk.annot.SdkDsDef
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
 
@@ -13,7 +12,7 @@ import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
 abstract class AbstractJdbcConnApi : AbstractConnApi() {
     
     private fun ConnProfile.findJdbcDsDef(): JdbcDsDef =
-            DmKodeinHelper.findImpl<Set<JdbcDsDef>>(datasource, tag = SdkDsDef::class)
+            DmKodeinHelper.findImpl<Iterable<JdbcDsDef>>(datasource)
                     .first { it.version == dsVersion }
     
     protected fun ConnProfile.findDsDriverClassname() = findJdbcDsDef().driver.classname

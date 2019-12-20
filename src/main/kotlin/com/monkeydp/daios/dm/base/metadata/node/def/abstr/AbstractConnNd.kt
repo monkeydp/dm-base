@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dm.base.metadata.node.def.abstr
 
-import com.monkeydp.daios.dm.base.metadata.node.StdConnNode
 import com.monkeydp.daios.dm.base.metadata.node.def.contract.ConnNd
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
+import com.monkeydp.daios.dms.sdk.metadata.node.connNode
 
 /**
  * @author iPotato
@@ -10,7 +10,7 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  */
 abstract class AbstractConnNd : ConnNd, AbstractNd() {
     override fun create(cp: ConnProfile) =
-            StdConnNode(
+            connNode(
                     cp = cp,
                     defId = id,
                     target = target,

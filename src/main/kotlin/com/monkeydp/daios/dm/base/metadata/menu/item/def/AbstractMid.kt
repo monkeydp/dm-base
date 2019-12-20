@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
+import com.monkeydp.daios.dms.sdk.metadata.menu.item.menuItem
 import com.monkeydp.tools.exception.inner.PropertyUninitializedException
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import kotlin.properties.Delegates
@@ -39,12 +39,13 @@ abstract class AbstractMid(
     
     override var menuDef: MenuDef? = null
     
-    override fun create() = StdMi(
-            instr = instr,
-            name = name,
-            icon = icon,
-            hasSubmenu = menuDef != null
-    )
+    override fun create() =
+            menuItem(
+                    instr = instr,
+                    name = name,
+                    icon = icon,
+                    hasSubmenu = menuDef != null
+            )
     
     override fun toString() = "[DEF] $name"
 }

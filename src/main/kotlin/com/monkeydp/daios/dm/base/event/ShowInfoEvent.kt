@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.event
 
 import com.monkeydp.daios.dms.sdk.event.AbstractInstrEvent
-import com.monkeydp.daios.dms.sdk.metadata.info.Info
+import com.monkeydp.daios.dms.sdk.instruction.target.info.TargetInfo
 
 /**
  * @author iPotato
@@ -9,5 +9,5 @@ import com.monkeydp.daios.dms.sdk.metadata.info.Info
  */
 class ShowInfoEvent(
         source: Any,
-        val info: Info
+        val info: TargetInfo
 ) : AbstractInstrEvent(source)

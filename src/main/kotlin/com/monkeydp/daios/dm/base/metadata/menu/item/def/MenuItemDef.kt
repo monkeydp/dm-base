@@ -4,6 +4,7 @@ import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
+import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -17,3 +18,5 @@ interface MenuItemDef {
     
     fun create(): MenuItem
 }
+
+fun menuItemDef(init: MenuItemDef.() -> Unit): MenuItemDef = initInstance<StdMid>(init)

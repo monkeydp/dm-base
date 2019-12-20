@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dm.base.metadata.menu.def
 
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
-import com.monkeydp.daios.dm.base.metadata.menu.item.def.StdMid
+import com.monkeydp.daios.dm.base.metadata.menu.item.def.menuItemDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.menu.StdMenu
+import com.monkeydp.daios.dms.sdk.metadata.menu.menu
 
 /**
  * @author iPotato
@@ -19,8 +19,8 @@ abstract class AbstractMenuDef : MenuDef {
     }
     
     override fun Instruction.unaryPlus() {
-        _items.add(StdMid(instr = this))
+        also { _items.add(menuItemDef { instr = it }) }
     }
     
-    override fun create() = StdMenu(items.map { it.create() }.toList())
+    override fun create() = menu(_items.map { it.create() }.toList())
 }

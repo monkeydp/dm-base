@@ -3,6 +3,7 @@ package com.monkeydp.daios.dm.base.metadata.menu.def
 import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
+import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -15,3 +16,5 @@ interface MenuDef {
     operator fun Instruction.unaryPlus()
     fun create(): Menu
 }
+
+fun menuDef(init: MenuDef.() -> Unit): MenuDef = initInstance<StdMenuDef>(init)

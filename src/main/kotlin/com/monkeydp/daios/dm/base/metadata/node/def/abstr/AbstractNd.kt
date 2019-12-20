@@ -8,7 +8,7 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.Companion.SUFFIX
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
+import com.monkeydp.daios.dms.sdk.metadata.node.node
 import com.monkeydp.tools.ext.kotlin.camelCase2List
 import com.monkeydp.tools.ext.kotlin.lastOf
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
@@ -41,7 +41,7 @@ abstract class AbstractNd : NodeDef {
     }
     
     override fun create(name: String?) =
-            StdNode(
+            node(
                     defId = id,
                     target = target,
                     name = name ?: this.name,

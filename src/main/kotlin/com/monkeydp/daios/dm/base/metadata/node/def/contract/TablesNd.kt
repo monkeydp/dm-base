@@ -9,4 +9,4 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface TablesNd : GroupNd
 
-fun tables(init: TablesNd.() -> Unit) = initInstance<StdTablesNd>(init)
+fun tablesNd(init: (TablesNd.() -> Unit)? = null): TablesNd = initInstance<StdTablesNd>(init)

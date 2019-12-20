@@ -10,4 +10,4 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface TableNd : NodeDef
 
-fun table(init: TableNd.() -> Unit) = initInstance<StdTableNd>(init)
+fun tableNd(init: (TableNd.() -> Unit)? = null): TableNd = initInstance<StdTableNd>(init)

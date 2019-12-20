@@ -10,4 +10,4 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface DbNd : NodeDef
 
-fun db(init: DbNd.() -> Unit) = initInstance<StdDbNd>(init)
+fun dbNd(init: (DbNd.() -> Unit)? = null): DbNd = initInstance<StdDbNd>(init)

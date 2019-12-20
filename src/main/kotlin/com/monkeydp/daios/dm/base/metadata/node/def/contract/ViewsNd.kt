@@ -9,4 +9,4 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface ViewsNd : GroupNd
 
-fun views(init: ViewsNd.() -> Unit) = initInstance<StdViewsNd>(init)
+fun viewsNd(init: (ViewsNd.() -> Unit)? = null): ViewsNd = initInstance<StdViewsNd>(init)

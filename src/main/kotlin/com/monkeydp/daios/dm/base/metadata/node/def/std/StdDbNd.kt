@@ -6,4 +6,4 @@ import com.monkeydp.daios.dm.base.metadata.node.def.abstr.AbstractDbNd
  * @author iPotato
  * @date 2019/11/29
  */
-class StdDbNd : AbstractDbNd()
+internal class StdDbNd : AbstractDbNd()

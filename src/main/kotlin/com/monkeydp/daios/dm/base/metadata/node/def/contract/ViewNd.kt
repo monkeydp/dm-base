@@ -10,4 +10,4 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface ViewNd : NodeDef
 
-fun view(init: ViewNd.() -> Unit) = initInstance<StdViewNd>(init)
+fun viewNd(init: (ViewNd.() -> Unit)? = null): ViewNd = initInstance<StdViewNd>(init)

@@ -14,4 +14,4 @@ interface ConnNd : NodeDef {
     fun create(cp: ConnProfile): ConnNode
 }
 
-fun conn(init: ConnNd.() -> Unit) = initInstance<StdConnNd>(init)
+fun connNd(init: (ConnNd.() -> Unit)? = null): ConnNd = initInstance<StdConnNd>(init)

@@ -11,9 +11,9 @@ internal val kodein = DmKodein(BaseKodeinCompRepo)
 
 private object BaseKodeinCompRepo : DmKodeinCompRepo() {
     override val annotReflections = reflections(
-            packageNames = listOf(PackageName.sdk, PackageName.dmBase)
+            packageNames = listOf(PackageName.sdk, PackageName.base)
     )
     override val compReflections = reflections(
-            packageNames = listOf(PackageName.dmBase)
+            packageNames = listOf(PackageName.base)
     )
 }

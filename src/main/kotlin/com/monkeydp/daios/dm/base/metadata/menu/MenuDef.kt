@@ -1,10 +1,8 @@
-package com.monkeydp.daios.dm.base.metadata.menu.def
+package com.monkeydp.daios.dm.base.metadata.menu
 
-import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.tools.ext.kotlin.initInstance
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author iPotato

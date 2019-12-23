@@ -1,6 +1,5 @@
-package com.monkeydp.daios.dm.base.metadata.menu.item.def
+package com.monkeydp.daios.dm.base.metadata.menu
 
-import com.monkeydp.daios.dm.base.metadata.menu.def.MenuDef
 import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
@@ -30,7 +29,8 @@ interface MenuItemDef {
                 name: String? = null,
                 icon: Icon<*>? = null,
                 menuDef: MenuDef? = null
-        ): MenuItemDef = StdMid(instr, name, icon, menuDef)
+        ): MenuItemDef =
+                StdMid(instr, name, icon, menuDef)
     }
 }
 

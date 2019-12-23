@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.metadata.node.def.contract
+package com.monkeydp.daios.dm.base.metadata.node.def.sub
 
 import com.monkeydp.daios.dm.base.metadata.node.def.AbstractNd
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef

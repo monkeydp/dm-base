@@ -10,10 +10,10 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface ViewNd : NodeDef {
     companion object {
-        operator fun invoke(init: (ViewNd.() -> Unit)? = null): ViewNd = initInstance<ViewNdImpl>(init)
+        operator fun invoke(init: (ViewNd.() -> Unit)? = null): ViewNd = initInstance<StdViewNd>(init)
     }
 }
 
 abstract class AbstractViewNd : ViewNd, AbstractNd()
 
-internal class ViewNdImpl : AbstractViewNd()
+internal class StdViewNd : AbstractViewNd()

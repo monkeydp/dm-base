@@ -8,10 +8,10 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface TablesNd : GroupNd{
     companion object {
-        operator fun invoke(init: (TablesNd.() -> Unit)? = null): TablesNd = initInstance<TablesNdImpl>(init)
+        operator fun invoke(init: (TablesNd.() -> Unit)? = null): TablesNd = initInstance<StdTablesNd>(init)
     }
 }
 
 abstract class AbstractTablesNd : TablesNd, AbstractGroupNd()
 
-private class TablesNdImpl : AbstractTablesNd()
+private class StdTablesNd : AbstractTablesNd()

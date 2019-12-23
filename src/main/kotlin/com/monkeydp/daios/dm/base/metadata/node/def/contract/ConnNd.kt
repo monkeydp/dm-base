@@ -15,7 +15,7 @@ interface ConnNd : NodeDef {
     fun create(cp: ConnProfile): ConnNode
     
     companion object {
-        operator fun invoke(init: (ConnNd.() -> Unit)? = null): ConnNd = initInstance<ConnNdImpl>(init)
+        operator fun invoke(init: (ConnNd.() -> Unit)? = null): ConnNd = initInstance<StdConnNd>(init)
     }
 }
 
@@ -29,4 +29,4 @@ abstract class AbstractConnNd : ConnNd, AbstractNd() {
             )
 }
 
-private class ConnNdImpl : AbstractConnNd()
+private class StdConnNd : AbstractConnNd()

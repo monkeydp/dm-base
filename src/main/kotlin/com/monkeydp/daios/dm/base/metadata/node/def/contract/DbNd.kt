@@ -10,10 +10,10 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface DbNd : NodeDef {
     companion object {
-        operator fun invoke(init: (DbNd.() -> Unit)? = null): DbNd = initInstance<DbNdImpl>(init)
+        operator fun invoke(init: (DbNd.() -> Unit)? = null): DbNd = initInstance<StdDbNd>(init)
     }
 }
 
 abstract class AbstractDbNd : DbNd, AbstractNd()
 
-private class DbNdImpl : AbstractDbNd()
+private class StdDbNd : AbstractDbNd()

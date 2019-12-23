@@ -8,10 +8,10 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface ViewsNd : GroupNd {
     companion object {
-        operator fun invoke(init: (ViewsNd.() -> Unit)? = null): ViewsNd = initInstance<ViewsNdImpl>(init)
+        operator fun invoke(init: (ViewsNd.() -> Unit)? = null): ViewsNd = initInstance<StdViewsNd>(init)
     }
 }
 
 abstract class AbstractViewsNd : ViewsNd, AbstractGroupNd()
 
-private class ViewsNdImpl : AbstractViewsNd()
+private class StdViewsNd : AbstractViewsNd()

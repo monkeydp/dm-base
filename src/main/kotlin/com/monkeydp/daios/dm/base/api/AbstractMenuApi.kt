@@ -13,11 +13,10 @@ abstract class AbstractMenuApi : MenuApi {
     
     protected fun findNextDef(path: MenuPath, def: MenuDef) = recurFindNextDef(path.iterator(), def)
     
-    private fun recurFindNextDef(iterator: MutableIterator<MenuItem>, def: MenuDef): MenuDef? {
+    private tailrec fun recurFindNextDef(iterator: MutableIterator<MenuItem>, def: MenuDef): MenuDef {
         if (!iterator.hasNext()) return def
         val item = iterator.next()
-        var nextDef = def.items.firstOrNull() { it.instr == item.instr }?.menuDef
-        if (iterator.hasNext() && nextDef != null) nextDef = recurFindNextDef(iterator, nextDef)
-        return nextDef
+        val nextDef = def.items.first() { it.id == item.defId }.menuDef!!
+        return recurFindNextDef(iterator, nextDef)
     }
 }

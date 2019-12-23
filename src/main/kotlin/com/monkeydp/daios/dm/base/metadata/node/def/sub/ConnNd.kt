@@ -24,7 +24,8 @@ abstract class AbstractConnNd : ConnNd, AbstractNd() {
                     cp = cp,
                     defId = id,
                     target = target,
-                    icon = icon
+                    icon = icon,
+                    hasMenu = menuDef != null
             )
 }
 

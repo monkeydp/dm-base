@@ -15,12 +15,16 @@ import kotlin.properties.Delegates
  * @date 2019/11/3
  */
 interface NodeDef {
+    
     val id: Int
+    
     var target: Target<*>
     var name: String
     var icon: Icon<*>
+    
     var parent: NodeDef?
     val children: List<NodeDef>
+    
     var menuDef: MenuDef?
     
     /**
@@ -37,7 +41,7 @@ interface NodeDef {
 abstract class AbstractNd : NodeDef {
     
     companion object {
-        val idGenerator = AtomicInteger()
+        private val idGenerator = AtomicInteger()
     }
     
     override val id = idGenerator.incrementAndGet()
@@ -67,7 +71,8 @@ abstract class AbstractNd : NodeDef {
                     defId = id,
                     target = target,
                     name = name ?: this.name,
-                    icon = icon
+                    icon = icon,
+                    hasMenu = menuDef != null
             )
     
     protected open fun defaultTarget() = GlobalTarget::class.valueOfOrNull(targetName)

@@ -4,12 +4,14 @@ import com.monkeydp.daios.dm.base.metadata.menu.item.def.MenuItemDef
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.tools.ext.kotlin.initInstance
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author iPotato
  * @date 2019/11/4
  */
 interface MenuDef {
+    
     val items: List<MenuItemDef>
     
     operator fun MenuItemDef.unaryPlus()
@@ -22,6 +24,7 @@ interface MenuDef {
 }
 
 abstract class AbstractMenuDef : MenuDef {
+    
     private val _items = mutableListOf<MenuItemDef>()
     override val items get() = _items.toList()
     
@@ -30,7 +33,7 @@ abstract class AbstractMenuDef : MenuDef {
     }
     
     override fun Instruction.unaryPlus() {
-        also { _items.add(MenuItemDef(it)) }
+        also { _items.add(MenuItemDef(instr = it)) }
     }
     
     override fun create() = Menu(_items.map { it.create() }.toList())

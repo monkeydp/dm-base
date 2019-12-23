@@ -3,7 +3,7 @@ package com.monkeydp.daios.dm.base.config
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinCompRepo
 
-abstract class BaseKodeinCompRepo : AbstractKodeinCompRepo() {
+abstract class DmKodeinCompRepo : AbstractKodeinCompRepo() {
     override val annotReflections = reflections(
             packageNames = listOf(PackageName.sdk, PackageName.dm)
     )

@@ -2,7 +2,7 @@ package com.monkeydp.daios.dm.base.config
 
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.share.kodein.kodeinModules
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinCompRepo
+import com.monkeydp.tools.ext.kodein.component.AbstractKodeinCompRepo
 
 abstract class DmKodeinCompRepo : AbstractKodeinCompRepo() {
     override val modules = kodeinModules

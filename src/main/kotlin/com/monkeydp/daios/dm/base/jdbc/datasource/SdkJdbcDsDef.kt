@@ -2,8 +2,8 @@ package com.monkeydp.daios.dm.base.jdbc.datasource
 
 import com.monkeydp.daios.dms.sdk.datasource.SdkDsDef
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinBuilderConfig
-import com.monkeydp.tools.ext.kodein.component.contract.KodeinFieldComp
+import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinFieldComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind

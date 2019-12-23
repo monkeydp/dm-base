@@ -6,7 +6,6 @@ import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.node
 import com.monkeydp.tools.ext.kotlin.camelCase2List
 import com.monkeydp.tools.ext.kotlin.lastOf
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
@@ -59,7 +58,7 @@ abstract class AbstractNd : NodeDef {
     }
     
     override fun create(name: String?) =
-            node(
+            Node(
                     defId = id,
                     target = target,
                     name = name ?: this.name,

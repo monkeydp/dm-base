@@ -4,7 +4,6 @@ import com.monkeydp.daios.dm.base.metadata.node.def.AbstractNd
 import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.connNode
 import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
@@ -21,7 +20,7 @@ interface ConnNd : NodeDef {
 
 abstract class AbstractConnNd : ConnNd, AbstractNd() {
     override fun create(cp: ConnProfile) =
-            connNode(
+            ConnNode(
                     cp = cp,
                     defId = id,
                     target = target,

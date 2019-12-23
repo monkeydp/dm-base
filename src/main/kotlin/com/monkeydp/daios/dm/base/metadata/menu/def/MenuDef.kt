@@ -15,6 +15,25 @@ interface MenuDef {
     operator fun MenuItemDef.unaryPlus()
     operator fun Instruction.unaryPlus()
     fun create(): Menu
+    
+    companion object {
+        operator fun invoke(init: MenuDef.() -> Unit): MenuDef = initInstance<StdMenuDef>(init)
+    }
 }
 
-fun menuDef(init: MenuDef.() -> Unit): MenuDef = initInstance<StdMenuDef>(init)
+abstract class AbstractMenuDef : MenuDef {
+    private val _items = mutableListOf<MenuItemDef>()
+    override val items get() = _items.toList()
+    
+    override operator fun MenuItemDef.unaryPlus() {
+        _items.add(this)
+    }
+    
+    override fun Instruction.unaryPlus() {
+        also { _items.add(MenuItemDef(it)) }
+    }
+    
+    override fun create() = Menu(_items.map { it.create() }.toList())
+}
+
+private class StdMenuDef : AbstractMenuDef()

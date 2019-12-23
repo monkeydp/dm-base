@@ -6,10 +6,8 @@ import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.tools.ext.kotlin.camelCase2List
-import com.monkeydp.tools.ext.kotlin.lastOf
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
-import com.monkeydp.tools.ext.kotlin.valueOfOrNull
+import com.monkeydp.tools.ext.kotlin.*
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.properties.Delegates
 
 /**
@@ -17,7 +15,7 @@ import kotlin.properties.Delegates
  * @date 2019/11/3
  */
 interface NodeDef {
-    var id: Int
+    val id: Int
     var target: Target<*>
     var name: String
     var icon: Icon<*>
@@ -38,22 +36,29 @@ interface NodeDef {
 
 abstract class AbstractNd : NodeDef {
     
-    override var id by Delegates.notNullSingleton<Int>()
+    companion object {
+        val idGenerator = AtomicInteger()
+    }
+    
+    override val id = idGenerator.incrementAndGet()
+    
+    private val nd: NodeDef = this
     
     protected val targetName = javaClass.simpleName.camelCase2List().lastOf(1)
     
-    override var target: Target<*> by Delegates.notNullSingleton(defaultTarget())
-    override var name: String by Delegates.notNullSingleton("")
-    override var icon: Icon<*> by Delegates.notNullSingleton(defaultIcon())
+    override var target: Target<*> by Delegates.singleton(defaultTarget())
+    override var name: String by Delegates.singleton("")
+    override var icon: Icon<*> by Delegates.singleton(defaultIcon())
     
-    override var parent: NodeDef? = null
+    override var parent: NodeDef? by Delegates.singletonOrNull({ null })
     private val _children = mutableListOf<NodeDef>()
     override val children
         get() = _children.toList()
     
-    override var menuDef: MenuDef? = null
+    override var menuDef: MenuDef? by Delegates.singletonOrNull({ null })
     
     override operator fun NodeDef.unaryPlus() {
+        this.parent = nd
         _children.add(this)
     }
     

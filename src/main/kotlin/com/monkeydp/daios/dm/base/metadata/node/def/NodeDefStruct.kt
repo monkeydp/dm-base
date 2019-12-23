@@ -3,7 +3,6 @@ package com.monkeydp.daios.dm.base.metadata.node.def
 import com.monkeydp.daios.dm.base.metadata.node.def.sub.ConnNd
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author iPotato
@@ -15,24 +14,15 @@ interface NodeDefStruct {
 
 abstract class AbstractNdStruct(def: NodeDef) : NodeDefStruct {
     override val struct = listOf(def)
-    private val defs = initDefs()
+    private val defs = recurFlatten(struct)
     
-    private fun flatten() = recurGetDefs(struct)
-    
-    private fun recurGetDefs(struct: List<NodeDef>): List<NodeDef> {
+    private fun recurFlatten(struct: List<NodeDef>): List<NodeDef> {
         val defs = mutableListOf<NodeDef>()
         struct.forEach {
             defs.add(it)
-            defs.addAll(recurGetDefs(it.children))
+            defs.addAll(recurFlatten(it.children))
         }
         return defs.toList()
-    }
-    
-    private fun initDefs(): List<NodeDef> {
-        val defs = flatten()
-        val count = AtomicInteger()
-        defs.forEach { it.id = count.incrementAndGet() }
-        return defs
     }
     
     fun findConnNd() = findNd { it.target == GlobalTarget.CONN } as ConnNd

@@ -11,21 +11,9 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
  */
 interface JdbcDsDef : DsDef {
     val driver: DsDriver
-    
-    companion object {
-        operator fun invoke(
-                version: DsVersion<*>,
-                driver: DsDriver
-        ): JdbcDsDef = StdJdbcDsDef(version, driver)
-    }
 }
 
 abstract class AbstractJdbcDsDef(
         version: DsVersion<*>,
         override val driver: DsDriver
 ) : JdbcDsDef, AbstractDsDef(version)
-
-private class StdJdbcDsDef(
-        version: DsVersion<*>,
-        driver: DsDriver
-) : AbstractJdbcDsDef(version, driver)

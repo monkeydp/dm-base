@@ -1,20 +1,30 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
-import com.monkeydp.daios.dm.base.metadata.node.def.sub.ConnNd
-import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-
 /**
  * @author iPotato
  * @date 2019/11/29
  */
 interface NodeDefStruct {
+    /**
+     * tree struct
+     */
     val struct: List<NodeDef>
+    
+    /**
+     * flatten struct
+     */
+    val flattenStruct: List<NodeDef>
+    
+    /**
+     * @param id ↓
+     * @see NodeDef.id
+     */
+    fun find(id: Int) = flattenStruct.first { it.id == id }
 }
 
 abstract class AbstractNdStruct(def: NodeDef) : NodeDefStruct {
     override val struct = listOf(def)
-    private val defs = recurFlatten(struct)
+    override val flattenStruct = recurFlatten(struct)
     
     private fun recurFlatten(struct: List<NodeDef>): List<NodeDef> {
         val defs = mutableListOf<NodeDef>()
@@ -24,10 +34,7 @@ abstract class AbstractNdStruct(def: NodeDef) : NodeDefStruct {
         }
         return defs.toList()
     }
-    
-    fun findConnNd() = findNd { it.target == GlobalTarget.CONN } as ConnNd
-    
-    protected fun findNd(filter: (NodeDef) -> Boolean) = defs.first(filter)
-    
-    fun findNd(node: Node) = defs.first { it.id == node.defId }
 }
+
+inline fun <reified ND : NodeDef> NodeDefStruct.find(): ND =
+        flattenStruct.first { it is ND } as ND

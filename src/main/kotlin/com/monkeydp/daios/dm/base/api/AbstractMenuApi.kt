@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dm.base.api
 
-import com.monkeydp.daios.dm.base.metadata.menu.MenuDef
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
 import com.monkeydp.daios.dms.sdk.api.MenuApi
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuPath
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuItem
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuPath
 
 /**
  * @author iPotato

@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.tools.exception.inner.InnerException
 
 /**

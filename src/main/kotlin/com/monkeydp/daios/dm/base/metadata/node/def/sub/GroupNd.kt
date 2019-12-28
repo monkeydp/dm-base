@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.metadata.node.def.sub
 
-import com.monkeydp.daios.dm.base.metadata.node.def.AbstractNd
-import com.monkeydp.daios.dm.base.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNd
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon

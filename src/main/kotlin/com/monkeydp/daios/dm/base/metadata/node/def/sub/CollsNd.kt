@@ -13,6 +13,8 @@ interface CollsNd : GroupNd {
     }
 }
 
-abstract class AbstractCollsNd : CollsNd, AbstractGroupNd()
+abstract class AbstractCollsNd : CollsNd, AbstractGroupNd() {
+    override var name = "Collections"
+}
 
 private class StdCollsNd : AbstractCollsNd()

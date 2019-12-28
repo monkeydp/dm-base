@@ -8,8 +8,8 @@ import java.sql.Connection
  * @author iPotato
  * @date 2019/10/29
  */
-object JdbcTablesLoader {
-    fun loadTables(connection: Connection, def: NodeDef, sql: String): List<Node> {
+object JdbcTableLoader {
+    fun loadTableNodes(connection: Connection, def: NodeDef, sql: String): List<Node> {
         val nodes = mutableListOf<Node>()
         connection.prepareStatement(sql).use {
             it.executeQuery().use { resultSet ->

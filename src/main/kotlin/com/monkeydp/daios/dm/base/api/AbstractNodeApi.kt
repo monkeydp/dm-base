@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dm.base.api
 
 import com.monkeydp.daios.dm.base.metadata.node.def.ConnNd
+import com.monkeydp.daios.dm.base.metadata.node.def.GroupNd
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.node.*
@@ -19,7 +20,14 @@ abstract class AbstractNodeApi : NodeApi {
             ndStruct.find<ConnNd>().run { cps.map { create(it) } }
     
     override fun loadSubNodes(path: NodePath): List<Node> =
-            path.getLastNodeDef().children.map { loadNodes(path, it) }.flatten()
+            path.getLastNodeDef().children.map {
+                when (it) {
+                    is GroupNd -> loadGroupNodes(it)
+                    else -> loadNonGroupNodes(path, it)
+                }
+            }.flatten()
     
-    protected abstract fun loadNodes(path: NodePath, def: NodeDef): List<Node>
+    private fun loadGroupNodes(def: NodeDef): List<Node> = listOf(ndStruct.find(def.id).create())
+    
+    protected abstract fun loadNonGroupNodes(path: NodePath, def: NodeDef): List<Node>
 }

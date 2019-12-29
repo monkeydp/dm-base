@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dm.base.metadata.node.def
 
-import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNd
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
+import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNd
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.tools.ext.kotlin.singleton
 import kotlin.properties.Delegates
 

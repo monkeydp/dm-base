@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.conn
 
 import com.monkeydp.daios.dms.sdk.conn.NewConnForm
-import com.monkeydp.daios.dms.sdk.metadata.JsType.NUMBER
+import com.monkeydp.daios.dms.sdk.ui.JsType.NUMBER
 import com.monkeydp.daios.dms.sdk.received.form.annot.ReceivedFormItem
 
 /**

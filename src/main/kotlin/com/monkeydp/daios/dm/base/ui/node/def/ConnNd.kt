@@ -1,9 +1,9 @@
-package com.monkeydp.daios.dm.base.metadata.node.def
+package com.monkeydp.daios.dm.base.ui.node.def
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.AbstractNd
-import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
+import com.monkeydp.daios.dms.sdk.ui.node.AbstractNd
+import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
+import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
 import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**

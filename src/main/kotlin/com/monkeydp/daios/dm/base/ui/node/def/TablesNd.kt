@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dm.base.metadata.node.def
+package com.monkeydp.daios.dm.base.ui.node.def
 
 import com.monkeydp.tools.ext.kotlin.initInstance
 

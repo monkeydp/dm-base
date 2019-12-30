@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.jdbc.api.node
 
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
+import com.monkeydp.daios.dms.sdk.ui.node.Node
+import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
 import java.sql.Connection
 
 /**

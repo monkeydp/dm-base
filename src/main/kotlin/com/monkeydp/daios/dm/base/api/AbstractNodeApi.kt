@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dm.base.api
 
-import com.monkeydp.daios.dm.base.metadata.node.def.ConnNd
-import com.monkeydp.daios.dm.base.metadata.node.def.GroupNd
+import com.monkeydp.daios.dm.base.ui.node.def.ConnNd
+import com.monkeydp.daios.dm.base.ui.node.def.GroupNd
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.*
+import com.monkeydp.daios.dms.sdk.ui.node.*
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 

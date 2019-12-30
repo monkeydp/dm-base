@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dm.base.config
 
 import com.monkeydp.daios.dms.sdk.config.PackageName
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodein
+import com.monkeydp.daios.dms.sdk.dm.DmKodein
 
 /**
  * @author iPotato

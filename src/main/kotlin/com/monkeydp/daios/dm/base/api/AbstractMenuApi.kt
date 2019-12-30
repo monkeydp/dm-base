@@ -3,8 +3,8 @@ package com.monkeydp.daios.dm.base.api
 import com.monkeydp.daios.dms.sdk.api.MenuApi
 import com.monkeydp.daios.dms.sdk.ui.menu.Menu
 import com.monkeydp.daios.dms.sdk.ui.menu.MenuDefStruct
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 
 /**
  * @author iPotato

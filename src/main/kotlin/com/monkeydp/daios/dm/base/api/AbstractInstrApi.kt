@@ -3,8 +3,8 @@ package com.monkeydp.daios.dm.base.api
 import com.monkeydp.daios.dms.sdk.api.InstrApi
 import com.monkeydp.daios.dms.sdk.instruction.InstrParser
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 
 /**
  * @author iPotato

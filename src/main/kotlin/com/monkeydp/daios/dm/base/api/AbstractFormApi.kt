@@ -5,8 +5,8 @@ import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.ui.form.Form
 import com.monkeydp.daios.dms.sdk.ui.form.FormBuilder
 import com.monkeydp.daios.dms.sdk.received.form.ReceivedForm
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import kotlin.reflect.KClass
 
 /**

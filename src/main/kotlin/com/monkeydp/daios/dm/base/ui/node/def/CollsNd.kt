@@ -1,7 +1,5 @@
 package com.monkeydp.daios.dm.base.ui.node.def
 
-import com.monkeydp.tools.ext.kotlin.initInstance
-
 /**
  * @author iPotato
  * @date 2019/11/29
@@ -9,7 +7,7 @@ import com.monkeydp.tools.ext.kotlin.initInstance
 interface CollsNd : GroupNd {
     companion object {
         operator fun invoke(init: (CollsNd.() -> Unit)? = null): CollsNd =
-                initInstance<StdCollsNd>(init)
+                StdCollsNd().apply { init?.invoke(this) }
     }
 }
 

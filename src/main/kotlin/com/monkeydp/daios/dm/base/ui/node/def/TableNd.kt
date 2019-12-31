@@ -2,7 +2,6 @@ package com.monkeydp.daios.dm.base.ui.node.def
 
 import com.monkeydp.daios.dms.sdk.ui.node.AbstractNd
 import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
-import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -10,7 +9,8 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface TableNd : NodeDef {
     companion object {
-        operator fun invoke(init: (TableNd.() -> Unit)? = null): TableNd = initInstance<StdTableNd>(init)
+        operator fun invoke(init: (TableNd.() -> Unit)? = null): TableNd =
+                StdTableNd().apply { init?.invoke(this) }
     }
 }
 

@@ -2,7 +2,6 @@ package com.monkeydp.daios.dm.base.ui.node.def
 
 import com.monkeydp.daios.dms.sdk.ui.node.AbstractNd
 import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
-import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -10,7 +9,8 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface DbNd : NodeDef {
     companion object {
-        operator fun invoke(init: (DbNd.() -> Unit)? = null): DbNd = initInstance<StdDbNd>(init)
+        operator fun invoke(init: (DbNd.() -> Unit)? = null): DbNd =
+                StdDbNd().apply { init?.invoke(this) }
     }
 }
 

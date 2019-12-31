@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dm.base.api
 
 import com.monkeydp.daios.dms.sdk.api.MenuApi
-import com.monkeydp.daios.dms.sdk.ui.menu.Menu
-import com.monkeydp.daios.dms.sdk.ui.menu.MenuDefStruct
 import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.dm.findImpl
+import com.monkeydp.daios.dms.sdk.ui.menu.Menu
+import com.monkeydp.daios.dms.sdk.ui.menu.MenuDefStruct
 
 /**
  * @author iPotato

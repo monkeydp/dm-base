@@ -4,9 +4,10 @@ import com.monkeydp.daios.dm.base.ui.node.def.ConnNd
 import com.monkeydp.daios.dm.base.ui.node.def.GroupNd
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.ui.node.*
+import com.monkeydp.daios.dms.sdk.context.NodeContext
 import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.dm.findImpl
+import com.monkeydp.daios.dms.sdk.ui.node.*
 
 /**
  * @author iPotato
@@ -14,12 +15,15 @@ import com.monkeydp.daios.dms.sdk.dm.findImpl
  */
 abstract class AbstractNodeApi : NodeApi {
     
-    protected val ndStruct: NodeDefStruct get() = dmKodeinRepo.findImpl()
+    private val ndStruct: NodeDefStruct get() = dmKodeinRepo.findImpl()
+    private val nodeContext: NodeContext get() = dmKodeinRepo.findImpl()
     
     override fun loadConnNodes(cps: Iterable<ConnProfile>): List<ConnNode> =
             ndStruct.find<ConnNd>().run { cps.map { create(it) } }
     
-    override fun loadSubNodes(path: NodePath): List<Node> =
+    override fun loadSubNodes(): List<Node> = loadSubNodes(nodeContext.path)
+    
+    private fun loadSubNodes(path: NodePath): List<Node> =
             path.getLastNodeDef().children.map {
                 when (it) {
                     is GroupNd -> loadGroupNodes(it)

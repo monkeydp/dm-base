@@ -4,7 +4,6 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.ui.node.AbstractNd
 import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
 import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
-import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -14,7 +13,8 @@ interface ConnNd : NodeDef {
     fun create(cp: ConnProfile): ConnNode
     
     companion object {
-        operator fun invoke(init: (ConnNd.() -> Unit)? = null): ConnNd = initInstance<StdConnNd>(init)
+        operator fun invoke(init: (ConnNd.() -> Unit)? = null): ConnNd =
+                StdConnNd().apply { init?.invoke(this) }
     }
 }
 

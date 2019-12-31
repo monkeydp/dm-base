@@ -2,7 +2,6 @@ package com.monkeydp.daios.dm.base.ui.node.def
 
 import com.monkeydp.daios.dms.sdk.ui.node.AbstractNd
 import com.monkeydp.daios.dms.sdk.ui.node.NodeDef
-import com.monkeydp.tools.ext.kotlin.initInstance
 
 /**
  * @author iPotato
@@ -11,7 +10,7 @@ import com.monkeydp.tools.ext.kotlin.initInstance
 interface CollNd : NodeDef {
     companion object {
         operator fun invoke(init: (CollNd.() -> Unit)? = null): CollNd =
-                initInstance<StdCollNd>(init)
+                StdCollNd().apply { init?.invoke(this) }
     }
 }
 

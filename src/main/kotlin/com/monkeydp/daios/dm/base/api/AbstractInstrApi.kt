@@ -11,8 +11,6 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
  * @date 2019/11/5
  */
 abstract class AbstractInstrApi : InstrApi {
-    override fun parse(ctx: InstrParsingCtx) {
-        val parser: InstrParser = dmKodeinRepo.findImpl(tag = ctx.instr)
-        parser.parse(ctx)
-    }
+    override fun parse(ctx: InstrParsingCtx) =
+            dmKodeinRepo.findImpl<InstrParser>(tag = ctx.instr).parse(ctx)
 }

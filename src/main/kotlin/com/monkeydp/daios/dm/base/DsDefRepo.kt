@@ -2,7 +2,6 @@ package com.monkeydp.daios.dm.base
 
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.tools.ext.kotlin.getActualTypeInSuperclassX
-import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.toPropValues
 
 /**
@@ -15,5 +14,5 @@ interface DsDefRepo<T : DsDef> {
 
 abstract class AbstractDsDefRepo<T : DsDef> : DsDefRepo<T> {
     private val dsDefClass: Class<out T> = getActualTypeInSuperclassX()
-    override fun find(predicate: (T) -> Boolean): T = toPropValues(dsDefClass.kotlin).matchOne(predicate)
+    override fun find(predicate: (T) -> Boolean): T = toPropValues(dsDefClass.kotlin).single(predicate)
 }
